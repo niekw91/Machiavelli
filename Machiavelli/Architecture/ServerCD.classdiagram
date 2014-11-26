@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5dcb86f7-a66f-4765-989e-8d89807b3f18" name="ServerCD" linkedPackageId="183efd8c-fdde-4ccb-b424-6980cc50c8a0" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="bba1864f-53b7-40fc-bf73-e2ec6c0b8fcc" name="BuildingCard" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5960e76f-b4a4-4767-b0de-ec28ce1a61a0" />
+        <generalsInternal>
+          <generalization Id="8abbdb97-4e3d-4835-9029-31fd76152c34" isSubstitutable="false">
+            <classMoniker Id="2a5feb61-db65-4ffa-afa8-7be722cce13d" LastKnownName="Card" />
+            <elementDefinition Id="fd041840-8fc3-44e2-aec4-53cd9349faf1" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property Id="e75f99ef-e56d-4282-a2eb-1651d1c562a1" name="value" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a3020666-b595-4042-be14-f465f5a2a407" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a8997a02-5738-49eb-8672-2e98ff4cd49d" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c0907a9f-4559-437f-91bb-83d624a1b93e" name="CharacterCard" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="93a53697-d120-4f93-bf35-a5700e79af46" />
+        <generalsInternal>
+          <generalization Id="f34ec7c1-52f1-49e1-8c3e-a9ccb795ece7" isSubstitutable="false">
+            <classMoniker Id="2a5feb61-db65-4ffa-afa8-7be722cce13d" LastKnownName="Card" />
+            <elementDefinition Id="58966163-3e54-4455-b37e-97367f01b9fa" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="53b9ee9b-be1f-448a-9836-1c5a7a041339" name="CardStack&lt;T&gt;" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c07a5ef7-5b63-4bcd-a7df-8b2ab680a3a6" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2a5feb61-db65-4ffa-afa8-7be722cce13d" name="Card" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="673b99db-ba54-4623-b61b-7c90e091964b" />
+        <generalsInternal>
+          <generalization Id="410cc583-db46-4995-a029-f66af37ac986" isSubstitutable="false">
+            <classMoniker Id="94a6a4fb-c3ec-41c0-8cbb-585781ddb86a" LastKnownName="GameObject" />
+            <elementDefinition Id="c4904d0d-54f3-4629-b504-348da3b83265" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="980e7137-de82-4991-8670-3fd861fb73b5" isDerived="false" sourceEndRoleName="Card" targetEndRoleName="Rule" isLeaf="false" isAbstract="false">
+            <classMoniker Id="7a6fc2a8-5f6f-4d96-9823-d50007c0b803" LastKnownName="Rule" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="361cda52-db9f-4d32-92c3-91b6cf0e7e07" name="Card" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b15bdf2f-a480-43db-8dd8-a043210adb2f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="40a42164-55a8-4d15-bf46-9403d0de6002" name="Rule" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="3b11d489-4a21-4d02-955b-32bca409cb60" name="Lower" value="*">
+                      <elementDefinition Id="d317f777-cdab-4026-ba42-7957ed85e565" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="c5e25ece-e71d-4212-8b97-e54e8f7f836d" name="Upper" value="*">
+                      <elementDefinition Id="f816a1bd-5ee2-4f8e-b48c-99a78cee3951" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="88949a72-c3f8-4b39-81a7-2c166afbf235" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b6fce5bf-9053-4c38-aa85-d95a326aac43" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="3eca89d2-c067-4c49-a9bb-6ac9d3c47f92" name="color" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c3db1d51-275f-47a7-887a-3b637cbbe7ff" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="780c9d7f-61af-4f0f-bfc2-5472dae4b2ef" LastKnownName="enum&lt;Color&gt;" />
+            </type_NamedElement>
+          </property>
+          <property Id="c717b29f-3bd0-4fbf-94a4-6d67dcb9ab34" name="id" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4c733b48-6a67-4ff5-a5a7-c7ed6f99c830" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a8997a02-5738-49eb-8672-2e98ff4cd49d" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="79d7720e-1d77-4416-bced-7591ee37aad8" name="description" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="34447497-e80b-442d-9ae0-2d448127c088" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="ef99b0c5-0d39-493a-ba7a-97a8363d06aa" LastKnownName="String" />
+            </type_NamedElement>
+          </property>
+          <property Id="1899c649-d960-474e-a8a4-d7d5809e64ea" name="rules" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="626a9dfa-9541-413d-8d81-aeeb36ce22f6" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c573af8f-5662-4cf9-aeaa-b677305780f5" LastKnownName="vector&lt;Rule&gt;" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="94a6a4fb-c3ec-41c0-8cbb-585781ddb86a" name="GameObject" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="cfe031f9-a553-4fdf-8b89-c39e57f75d85" />
+        <ownedAttributesInternal>
+          <property Id="4a4f9170-835a-4c9d-85c3-301f225f2257" name="name" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="625af2b1-2f35-46a8-aa91-4f8e25ea2ec0" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="ef99b0c5-0d39-493a-ba7a-97a8363d06aa" LastKnownName="String" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7bdbe616-89c8-48c9-a156-4b2cc52985e6" name="Building" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b4c9203d-6e60-40a3-bbdc-26dbbedf2e20" />
+        <generalsInternal>
+          <generalization Id="510af4c2-a154-4753-b51b-97c3fb4d90b8" isSubstitutable="false">
+            <classMoniker Id="94a6a4fb-c3ec-41c0-8cbb-585781ddb86a" LastKnownName="GameObject" />
+            <elementDefinition Id="6c69cedc-1399-4eea-be1c-70a956f46ce1" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c697e99d-49a7-4820-a198-eb373ab4a73c" name="Player" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4503559a-acb9-447c-acdc-4ee03f3250c2" />
+        <ownedAttributesInternal>
+          <property Id="41f96460-3f5d-44a3-89f3-91216ad823f4" name="hasCrown" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8f50ab2f-42f1-4f00-b14f-502913cdb9f1" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="fc2c626b-e001-40b3-91bb-413e7304b9a6" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="fc2c626b-e001-40b3-91bb-413e7304b9a6" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="53e1ef31-fb5b-4cbf-b3fb-94d627e718d2" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="ef99b0c5-0d39-493a-ba7a-97a8363d06aa" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="780c9d7f-61af-4f0f-bfc2-5472dae4b2ef" name="enum&lt;Color&gt;" isAbstract="false" isLeaf="false" cachedFullName="enum&lt;Color&gt;">
+        <elementDefinition Id="8c3b6ee7-3807-43bb-aa24-63db38609f66" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="a8997a02-5738-49eb-8672-2e98ff4cd49d" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
+        <elementDefinition Id="b8cda042-48f4-4344-bc37-e66c737cb81d" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7a6fc2a8-5f6f-4d96-9823-d50007c0b803" name="Rule" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bc9552e9-19c1-4a95-be16-3272f6e4c9b8" />
+        <ownedAttributesInternal>
+          <property Id="c6342e6d-4bab-43c3-ab61-0f5868b02cbe" name="description" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ee515ff6-d058-46e7-a4ef-6acd24cc4598" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="ef99b0c5-0d39-493a-ba7a-97a8363d06aa" LastKnownName="String" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="c573af8f-5662-4cf9-aeaa-b677305780f5" name="vector&lt;Rule&gt;" isAbstract="false" isLeaf="false" cachedFullName="vector&lt;Rule&gt;">
+        <elementDefinition Id="78ff77af-cd04-489f-9c8e-16dcc1b4987a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5e1c57d8-cd63-447e-8c1b-960dea21cb57" name="GameStates" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="71601c65-97be-40a3-b90b-552f27277635" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="16ae3c98-aa26-4fb5-8625-f38b9add69d5" name="PlayerStates" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4bb8f370-70f7-4877-a5c7-97ea255e888b" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="183efd8c-fdde-4ccb-b424-6980cc50c8a0" name="Architecture">
+    <elementDefinition Id="8abe4abf-aef9-4a0e-bdc3-f261631512fc" />
+    <profileInstances>
+      <packageHasProfileInstances Id="b3fca9d5-1de6-48ac-82ea-3c2800baf4c0">
+        <profileInstance Id="3942e1ac-fca3-4697-96df-da5637f0fefb" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="28c76d02-3446-42c5-b08e-c265ec1ad301">
+        <profileInstance Id="18cb7feb-3e17-45ad-ba94-1dd7f78e06ac" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</logicalClassDesignerModel>
