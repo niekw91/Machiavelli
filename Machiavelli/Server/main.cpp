@@ -23,7 +23,6 @@ namespace socketexample {
 }
 
 static Sync_queue<ClientCommand> queue;
-Game *game;
 
 void consume_command() // runs in its own thread
 {
@@ -55,11 +54,11 @@ void handle_client(Socket* socket) // this function runs in a separate thread
 {
     shared_ptr<Socket> client {socket};
 
-	if (game->GetPlayerCount() < 2)
-		client->write("Waiting for second player...\n");
-	while (game->GetPlayerCount() < 2) { 
-		// Wait for player..
-	}
+	//if (game->GetPlayerCount() < 2)
+	//	client->write("Waiting for second player...\n");
+	//while (game->GetPlayerCount() < 2) { 
+	//	// Wait for player..
+	//}
 		
     client->write("Welcome to Machiavelli! To quit, type 'quit'.\n");
     client->write(socketexample::prompt);
@@ -104,7 +103,7 @@ void start_server()
 			Socket* client = nullptr;
 
 			while ((client = server.accept()) != nullptr) {
-				game->AddPlayer();
+				//game->AddPlayer();
 				// communicate with client over new socket in separate thread
 				thread handler{ handle_client, client };
 				handler.detach(); // detaching is usually ugly, but in this case the right thing to do
@@ -119,10 +118,19 @@ void start_server()
 
 int main(int argc, const char * argv[])
 {
-	game = new Game();
+	// Create game
+	auto game = make_unique<Game>();
+
+	// Initialize game
+	game->Init();
+
+	// Start game
+	game->Start();
+
+	// Cleanup game
+	game->Cleanup();
 
 	start_server();
     
     return 0;
 }
-
