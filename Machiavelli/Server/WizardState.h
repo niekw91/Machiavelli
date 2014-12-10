@@ -1,7 +1,7 @@
 #pragma once
-#include "GameState.h"
+#include "PlayerState.h"
 class WizardState :
-	public GameState
+	public PlayerState
 {
 public:
 	WizardState();
