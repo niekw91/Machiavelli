@@ -135,6 +135,12 @@
               <referencedTypeMoniker Id="fc2c626b-e001-40b3-91bb-413e7304b9a6" LastKnownName="bool" />
             </type_NamedElement>
           </property>
+          <property Id="5aba3725-5ba3-4fe1-b76d-035ab3764ef0" name="gold" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="cf544ee8-bd14-41a0-801c-80f269e5ab53" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a8997a02-5738-49eb-8672-2e98ff4cd49d" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
