@@ -13,42 +13,198 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{2edd4ead-56df-441e-9a37-4c6a30f9673d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\States">
+      <UniqueIdentifier>{53623c55-37c7-4a18-8d1c-df8f928d2a9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\States\GameStates">
+      <UniqueIdentifier>{e3e1cc97-29f5-4b8e-87c4-1774da6590cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\States\PlayerStates">
+      <UniqueIdentifier>{3156fc44-64da-4eda-844c-69304875b85f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\GameObjects">
+      <UniqueIdentifier>{ea0f9009-7e8b-4441-88bb-216a86f0f5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Server">
+      <UniqueIdentifier>{342fd095-0d57-42db-a558-fd9a1ae7b258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{82930096-1550-4c44-8dc2-d7de82563c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Server">
+      <UniqueIdentifier>{1521361a-b8bb-476b-bafd-2607eaf65b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\States">
+      <UniqueIdentifier>{336d4685-f356-4edd-bfd9-79d955376400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\States\PlayerStates">
+      <UniqueIdentifier>{5053104a-7ba2-4ebc-9d0a-f924bc1a284c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\States\GameStates">
+      <UniqueIdentifier>{c120ba9f-956f-4c94-8527-1310ecf09e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\GameObjects">
+      <UniqueIdentifier>{2354f784-09d5-450a-a5e7-23505320037d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClientCommand.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ArchitectState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
     </ClInclude>
-    <ClInclude Include="Socket.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="AssassinState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
     </ClInclude>
-    <ClInclude Include="Sync_queue.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="BishopState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
     </ClInclude>
-    <ClInclude Include="throw.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PlayerStateManager.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ThiefState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
+    </ClInclude>
+    <ClInclude Include="WarlordState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
+    </ClInclude>
+    <ClInclude Include="MerchantState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
+    </ClInclude>
+    <ClInclude Include="KingState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
+    </ClInclude>
+    <ClInclude Include="WizardState.h">
+      <Filter>Header Files\Game\States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Header Files\Game\States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Game\States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Header Files\Game\States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitingRoomState.h">
+      <Filter>Header Files\Game\States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayState.h">
+      <Filter>Header Files\Game\States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterCard.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingCard.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CardStack.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientCommand.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Sync_queue.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="throw.h">
+      <Filter>Header Files\Server</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Socket.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ArchitectState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
     </ClCompile>
-    <ClCompile Include="throw.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="AssassinState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="BishopState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="MerchantState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="ThiefState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="WizardState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="KingState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="WarlordState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStateManager.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
+      <Filter>Source Files\Game\States\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\Game\States\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files\Game\States\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitingRoomState.cpp">
+      <Filter>Source Files\Game\States\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files\Game\States\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterCard.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingCard.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CardStack.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>Source Files\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="throw.cpp">
+      <Filter>Source Files\Server</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

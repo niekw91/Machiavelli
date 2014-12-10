@@ -11,19 +11,59 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArchitectState.h" />
+    <ClInclude Include="AssassinState.h" />
+    <ClInclude Include="BishopState.h" />
+    <ClInclude Include="BuildingCard.h" />
+    <ClInclude Include="Card.h" />
+    <ClInclude Include="CardStack.h" />
+    <ClInclude Include="CharacterCard.h" />
     <ClInclude Include="ClientCommand.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="KingState.h" />
+    <ClInclude Include="MerchantState.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerStateManager.h" />
+    <ClInclude Include="PlayState.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="Sync_queue.h" />
+    <ClInclude Include="ThiefState.h" />
     <ClInclude Include="throw.h" />
+    <ClInclude Include="WaitingRoomState.h" />
+    <ClInclude Include="WarlordState.h" />
+    <ClInclude Include="WizardState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArchitectState.cpp" />
+    <ClCompile Include="AssassinState.cpp" />
+    <ClCompile Include="BishopState.cpp" />
+    <ClCompile Include="BuildingCard.cpp" />
+    <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CardStack.cpp" />
+    <ClCompile Include="CharacterCard.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="KingState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MerchantState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="PlayerStateManager.cpp" />
+    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Socket.cpp" />
+    <ClCompile Include="ThiefState.cpp" />
     <ClCompile Include="throw.cpp" />
+    <ClCompile Include="WaitingRoomState.cpp" />
+    <ClCompile Include="WarlordState.cpp" />
+    <ClCompile Include="WizardState.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB151B88-B15E-40F4-9383-1929100EEDCA}</ProjectGuid>

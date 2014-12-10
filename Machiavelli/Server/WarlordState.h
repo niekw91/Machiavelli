@@ -1,10 +1,10 @@
 #pragma once
 #include "PlayerState.h"
-class Warlord :
+class WarlordState :
 	public PlayerState
 {
 public:
-	Warlord();
-	~Warlord();
+	WarlordState();
+	~WarlordState();
 };
 
