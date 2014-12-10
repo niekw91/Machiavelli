@@ -78,9 +78,6 @@
     <ClInclude Include="KingState.h">
       <Filter>Header Files\Game\States\PlayerStates</Filter>
     </ClInclude>
-    <ClInclude Include="WizardState.h">
-      <Filter>Header Files\Game\States\GameStates</Filter>
-    </ClInclude>
     <ClInclude Include="GameOverState.h">
       <Filter>Header Files\Game\States\GameStates</Filter>
     </ClInclude>
@@ -128,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="throw.h">
       <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="WizardState.h">
+      <Filter>Header Files\Game\States\PlayerStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
