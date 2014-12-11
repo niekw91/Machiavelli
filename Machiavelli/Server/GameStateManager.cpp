@@ -3,21 +3,22 @@
 #include "GameState.h"
 #include "WaitingRoomState.h"
 
-GameStateManager::GameStateManager(Game &game)
+GameStateManager::GameStateManager()
 {
-	PushState(game, *make_unique<WaitingRoomState>());
+	
 }
 
 GameStateManager::~GameStateManager()
 {
+
 }
 
-void GameStateManager::Init(Game &game)
+void GameStateManager::Init(shared_ptr<Game> &game)
 {
-	//_states.push_back(make_unique<WaitingRoomState>());
+	//PushState(game, dynamic_pointer_cast<GameState>(make_shared<WaitingRoomState>()));
 }
 
-void GameStateManager::Cleanup(Game &game)
+void GameStateManager::Cleanup(shared_ptr<Game> &game)
 {
 	// Cleanup states
 	while (!_states.empty()){
@@ -26,7 +27,7 @@ void GameStateManager::Cleanup(Game &game)
 	}
 }
 
-void GameStateManager::ChangeState(Game &game, GameState &state)
+void GameStateManager::ChangeState(shared_ptr<Game> &game, shared_ptr<GameState> &state)
 {
 	// cleanup the current state
 	if (!_states.empty()) {
@@ -35,18 +36,18 @@ void GameStateManager::ChangeState(Game &game, GameState &state)
 	}
 
 	// store and init the new state
-	_states.push_back(make_unique<GameState>(state));
+	_states.push_back(state);
 	_states.back()->Init(game);
 }
 
-void GameStateManager::PushState(Game &game, GameState &state) 
+void GameStateManager::PushState(shared_ptr<Game> &game, shared_ptr<GameState> &state)
 {
 	// store and init the new state
-	_states.push_back(make_unique<GameState>(state));
+	_states.push_back(state);
 	_states.back()->Init(game);
 }
 
-void GameStateManager::PopState(Game &game)
+void GameStateManager::PopState(shared_ptr<Game> &game)
 {
 	// cleanup the current state
 	if (!_states.empty()) {
@@ -55,14 +56,21 @@ void GameStateManager::PopState(Game &game)
 	}
 }
 
-void GameStateManager::HandleEvents(Game &game)
+void GameStateManager::HandleEvents(shared_ptr<Game> &game)
 {
 	// handle events of current state
 	_states.back()->HandleEvents(game);
 }
 
-void GameStateManager::Update(Game &game)
+void GameStateManager::Update(shared_ptr<Game> &game) 
 {
 	// update current state
 	_states.back()->Update(game);
 }
+
+//// The workaround to take a shared_ptr<T> where T publicly derives from Base
+//template <typename T>
+//auto PushState(shared_ptr<Game>, shared_ptr<T>& pd) ->
+//decltype(PushState(shared_ptr<Game>, shared_ptr<GameState>(pd))) {
+//	return PushState(shared_ptr<Game>, shared_ptr<GameState>(pd));
+//}

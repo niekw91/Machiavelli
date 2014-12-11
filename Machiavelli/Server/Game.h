@@ -14,7 +14,7 @@ public:
 	Game();
 	virtual ~Game();
 
-	void Init();
+	void Init(shared_ptr<Game> &game);
 	void Cleanup();
 
 	void Start();
@@ -23,15 +23,15 @@ public:
 	void HandleEvents();
 	void Update();
 
-	unique_ptr<GameStateManager> &GetStateManager() { return _stateManager; }
-	vector<unique_ptr<Player>> &GetPlayers() { return _players; }
+	shared_ptr<GameStateManager> &GetStateManager() { return _stateManager; }
+	//shared_ptr<vector<shared_ptr<Player>>> &GetPlayers() { return _players; }
 
 	/*void AddPlayer();
 	int GetPlayerCount();*/
 
 private:
-	unique_ptr<GameStateManager> _stateManager;
-	vector<unique_ptr<Player>> _players;
+	shared_ptr<GameStateManager> _stateManager;
+	//shared_ptr<vector<shared_ptr<Player>>> _players;
 
 	bool _running;
 };

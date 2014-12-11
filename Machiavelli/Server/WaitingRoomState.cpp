@@ -9,22 +9,22 @@ WaitingRoomState::~WaitingRoomState()
 {
 }
 
-void WaitingRoomState::Init(Game &game)
+void WaitingRoomState::Init(shared_ptr<Game> &game)
 {
 
 }
 
-void WaitingRoomState::Cleanup(Game &game)
+void WaitingRoomState::Cleanup(shared_ptr<Game> &game)
 {
 
 }
 
-void WaitingRoomState::HandleEvents(Game &game)
+void WaitingRoomState::HandleEvents(shared_ptr<Game> &game)
 {
 
 }
 
-void WaitingRoomState::Update(Game &game)
+void WaitingRoomState::Update(shared_ptr<Game> &game)
 {
 
 }

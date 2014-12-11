@@ -1,11 +1,9 @@
-//#include "GameState.h"
-//
-//
-//GameState::GameState()
-//{
-//}
-//
-//
-//GameState::~GameState()
-//{
-//}
+#include "GameState.h"
+
+GameState::GameState()
+{
+}
+
+GameState::~GameState()
+{
+}

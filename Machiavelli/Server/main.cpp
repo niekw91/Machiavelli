@@ -119,10 +119,10 @@ void start_server()
 int main(int argc, const char * argv[])
 {
 	// Create game
-	auto game = make_unique<Game>();
+	auto game = make_shared<Game>();
 
 	// Initialize game
-	game->Init();
+	game->Init(game);
 
 	// Start game
 	game->Start();

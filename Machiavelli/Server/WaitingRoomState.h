@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.h"
+//#include <memory>
 
 // Forward declaration
 class Game;
@@ -11,9 +12,9 @@ public:
 	WaitingRoomState();
 	~WaitingRoomState();
 
-	void Init(Game &game);
-	void Cleanup(Game &game);
+	void Init(shared_ptr<Game> &game);
+	void Cleanup(shared_ptr<Game> &game);
 
-	void HandleEvents(Game &game);
-	void Update(Game &game);
+	void HandleEvents(shared_ptr<Game> &game);
+	void Update(shared_ptr<Game> &game);
 };
