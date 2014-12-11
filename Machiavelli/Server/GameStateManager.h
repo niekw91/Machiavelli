@@ -11,7 +11,7 @@ class GameState;
 class GameStateManager
 {
 public:
-	GameStateManager();
+	GameStateManager(shared_ptr<Game> &game);
 	~GameStateManager();
 
 	void Init(shared_ptr<Game> &game);

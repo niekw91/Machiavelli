@@ -6,7 +6,6 @@ Game::Game()
 {
 }
 
-
 Game::~Game() 
 {
 }
@@ -14,8 +13,7 @@ Game::~Game()
 void Game::Init(shared_ptr<Game> &game) 
 {
 	// Create statemanager
-	_stateManager = make_shared<GameStateManager>();
-	_stateManager->Init(game);
+	_stateManager = make_shared<GameStateManager>(game);
 
 	// Start running
 	_running = true;
@@ -26,12 +24,12 @@ void Game::Cleanup()
 
 }
 
-void Game::Start() 
+void Game::Start(shared_ptr<Game> &game)
 {
 	// Start game
 	while (_running) {
-		HandleEvents();
-		Update();
+		HandleEvents(game);
+		Update(game);
 	}
 }
 
@@ -40,14 +38,14 @@ void Game::Stop()
 	_running = false;
 }
 
-void Game::HandleEvents() 
+void Game::HandleEvents(shared_ptr<Game> &game)
 {
-	//_stateManager->HandleEvents(make_shared<Game>(this));
+	_stateManager->HandleEvents(game);
 }
 
-void Game::Update() 
+void Game::Update(shared_ptr<Game> &game)
 {
-	//_stateManager->Update(make_shared<Game>(this));
+	_stateManager->Update(game);
 }
 
 //void Game::AddPlayer() 

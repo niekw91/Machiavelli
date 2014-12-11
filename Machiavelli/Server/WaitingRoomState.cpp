@@ -21,7 +21,7 @@ void WaitingRoomState::Cleanup(shared_ptr<Game> &game)
 
 void WaitingRoomState::HandleEvents(shared_ptr<Game> &game)
 {
-
+	
 }
 
 void WaitingRoomState::Update(shared_ptr<Game> &game)

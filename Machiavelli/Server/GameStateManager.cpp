@@ -3,9 +3,9 @@
 #include "GameState.h"
 #include "WaitingRoomState.h"
 
-GameStateManager::GameStateManager()
+GameStateManager::GameStateManager(shared_ptr<Game> &game)
 {
-	
+	ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<WaitingRoomState>()));
 }
 
 GameStateManager::~GameStateManager()
@@ -15,7 +15,7 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::Init(shared_ptr<Game> &game)
 {
-	//PushState(game, dynamic_pointer_cast<GameState>(make_shared<WaitingRoomState>()));
+	PushState(game, dynamic_pointer_cast<GameState>(make_shared<WaitingRoomState>()));
 }
 
 void GameStateManager::Cleanup(shared_ptr<Game> &game)
@@ -67,10 +67,3 @@ void GameStateManager::Update(shared_ptr<Game> &game)
 	// update current state
 	_states.back()->Update(game);
 }
-
-//// The workaround to take a shared_ptr<T> where T publicly derives from Base
-//template <typename T>
-//auto PushState(shared_ptr<Game>, shared_ptr<T>& pd) ->
-//decltype(PushState(shared_ptr<Game>, shared_ptr<GameState>(pd))) {
-//	return PushState(shared_ptr<Game>, shared_ptr<GameState>(pd));
-//}

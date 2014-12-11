@@ -125,7 +125,7 @@ int main(int argc, const char * argv[])
 	game->Init(game);
 
 	// Start game
-	game->Start();
+	game->Start(game);
 
 	// Cleanup game
 	game->Cleanup();

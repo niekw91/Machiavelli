@@ -17,11 +17,11 @@ public:
 	void Init(shared_ptr<Game> &game);
 	void Cleanup();
 
-	void Start();
+	void Start(shared_ptr<Game> &game);
 	void Stop();
 
-	void HandleEvents();
-	void Update();
+	void HandleEvents(shared_ptr<Game> &game);
+	void Update(shared_ptr<Game> &game);
 
 	shared_ptr<GameStateManager> &GetStateManager() { return _stateManager; }
 	//shared_ptr<vector<shared_ptr<Player>>> &GetPlayers() { return _players; }
