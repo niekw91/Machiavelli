@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include <memory>
+#include "GameStateManager.h"
 // Forward declaration
 //class Game;
 

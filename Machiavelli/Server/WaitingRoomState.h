@@ -1,6 +1,5 @@
 #pragma once
 #include "GameState.h"
-//#include <memory>
 
 // Forward declaration
 class Game;
@@ -17,4 +16,6 @@ public:
 
 	void HandleEvents(shared_ptr<Game> &game);
 	void Update(shared_ptr<Game> &game);
+private:
+	bool _showWelcomeMessage;
 };

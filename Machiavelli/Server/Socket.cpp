@@ -14,7 +14,6 @@
 #include <string>
 #include <cstring>
 #include <stdexcept>
-#include <memory>
 
 #if defined(__APPLE__) || defined(__linux__)
 
@@ -179,7 +178,7 @@ ServerSocket::ServerSocket(int port)
 	throw_if_min1(::listen(sock, 100));  // the number of clients that can be queued
 }
 
-Socket *ServerSocket::accept()
+std::shared_ptr<Socket> ServerSocket::accept()
 {
 	struct sockaddr client_addr;
 	client_addr.sa_family = AF_INET;
@@ -188,7 +187,8 @@ Socket *ServerSocket::accept()
 	throw_if_min1(fd = ::accept(sock, &client_addr, &len));
 	Socket* client = new Socket(fd, client_addr);
     std::cerr << "Connection accepted from " << client->get_dotted_ip() << ", with socket " << fd << std::endl;
-	return client;
+	std::shared_ptr<Socket> my_ptr(client);
+	return my_ptr;
 }
 
 #pragma mark ClientSocket

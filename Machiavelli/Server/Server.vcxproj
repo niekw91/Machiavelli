@@ -30,6 +30,8 @@
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerStateManager.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="Server.h" />
+    <ClInclude Include="ServerConfig.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="Sync_queue.h" />
     <ClInclude Include="ThiefState.h" />
@@ -58,6 +60,7 @@
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerStateManager.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="ThiefState.cpp" />
     <ClCompile Include="throw.cpp" />
