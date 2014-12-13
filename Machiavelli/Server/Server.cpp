@@ -45,7 +45,7 @@ void Server::Start(shared_ptr<Game> &game) {
 	}
 }
 
-void Server::HandleClient(Socket* socket, shared_ptr<Game> &game) {
+void Server::HandleClient(shared_ptr<Socket> &socket, shared_ptr<Game> &game) {
 	shared_ptr<Socket> client{ socket };
 
 	while (true) {
