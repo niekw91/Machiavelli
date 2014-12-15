@@ -5,7 +5,7 @@
 
 GameStateManager::GameStateManager(shared_ptr<Game> &game)
 {
-	ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<WaitingRoomState>()));
+	Init(game);
 }
 
 GameStateManager::~GameStateManager()
@@ -15,7 +15,7 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::Init(shared_ptr<Game> &game)
 {
-	PushState(game, dynamic_pointer_cast<GameState>(make_shared<WaitingRoomState>()));
+	ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<WaitingRoomState>()));
 }
 
 void GameStateManager::Cleanup(shared_ptr<Game> &game)

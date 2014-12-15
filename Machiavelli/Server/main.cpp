@@ -122,10 +122,10 @@ int main(int argc, const char * argv[])
 	auto game = make_shared<Game>();
 
 	// Initialize game
-	game->Init(game);
+	game->Init();
 
 	// Start game
-	game->Start(game);
+	game->Start();
 
 	// Cleanup game
 	game->Cleanup();
