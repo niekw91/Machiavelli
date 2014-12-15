@@ -16,7 +16,7 @@ void PlayState::Init(shared_ptr<Game> &game)
 {
 	std::cout << "Game: 2 player connected, starting game" << std::endl;
 	auto players = game->GetPlayers();
-	for (size_t i = 0; i < players->size(); i++) {
+	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
 		players->at(i)->GetClient()->write("Starting game!\n");
 	}
 }
