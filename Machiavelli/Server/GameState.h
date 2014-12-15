@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include <memory>
+#include "GameStateManager.h"
 
 class GameState
 {
@@ -13,6 +14,5 @@ public:
 
 	virtual void HandleEvents(shared_ptr<Game> &game) = 0;
 	virtual void Update(shared_ptr<Game> &game) = 0;
-
 };
 

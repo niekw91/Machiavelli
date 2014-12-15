@@ -1,8 +1,9 @@
 #include "Player.h"
+#include "Socket.h"
 
 
-Player::Player()
-{
+Player::Player(shared_ptr<Socket> &client) {
+	this->client = client;
 }
 
 

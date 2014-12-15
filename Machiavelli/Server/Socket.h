@@ -26,6 +26,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 //=============================================================================
 class Socket
@@ -58,7 +59,7 @@ class ServerSocket : public Socket
 {
 public:
 	ServerSocket(int port);
-	Socket* accept();
+	std::shared_ptr<Socket> accept();
 };
 
 //=============================================================================

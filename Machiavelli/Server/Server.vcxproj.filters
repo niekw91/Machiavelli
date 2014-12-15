@@ -129,6 +129,12 @@
     <ClInclude Include="PlayerStateMachine.h">
       <Filter>Header Files\Game\States\PlayerStates</Filter>
     </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerConfig.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -202,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="PlayerStateMachine.cpp">
       <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

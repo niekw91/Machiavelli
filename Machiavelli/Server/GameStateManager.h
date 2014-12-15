@@ -27,4 +27,3 @@ public:
 private:
 	vector<shared_ptr<GameState>> _states;
 };
-
