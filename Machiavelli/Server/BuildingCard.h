@@ -4,7 +4,8 @@ class BuildingCard :
 	public Card
 {
 public:
-	BuildingCard();
+	BuildingCard(int id, string name, int value, int color);
+	BuildingCard(int id, string name, int value, int color, vector<string> description);
 	~BuildingCard();
 };
 

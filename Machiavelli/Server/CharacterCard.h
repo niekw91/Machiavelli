@@ -4,7 +4,6 @@ class CharacterCard :
 	public Card
 {
 public:
-	CharacterCard();
+	CharacterCard(int id, string name, int color, vector<string> description);
 	~CharacterCard();
 };
-
