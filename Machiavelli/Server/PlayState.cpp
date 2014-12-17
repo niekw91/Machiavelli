@@ -14,7 +14,7 @@ PlayState::~PlayState()
 
 void PlayState::Init(shared_ptr<Game> &game)
 {
-	std::cout << "Game: 2 player connected, starting game" << std::endl;
+	std::cerr << "Game: 2 player connected, starting game" << std::endl;
 	auto players = game->GetPlayers();
 	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
 		players->at(i)->GetClient()->write("Starting game!\n");
@@ -28,7 +28,16 @@ void PlayState::Cleanup(shared_ptr<Game> &game)
 
 void PlayState::HandleEvents(shared_ptr<Game> &game)
 {
+	if (game->HasNextCommand()) {
+		ClientCommand command = game->GetNextCommand();
+		auto players = game->GetPlayers();
+		for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
+			if (players->at(i)->GetClient() == command.get_client()) {
 
+			}
+		}
+		
+	}
 }
 
 void PlayState::Update(shared_ptr<Game> &game)

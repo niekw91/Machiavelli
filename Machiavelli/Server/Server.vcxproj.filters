@@ -164,9 +164,6 @@
     <ClCompile Include="WarlordState.cpp">
       <Filter>Source Files\Game\States\PlayerStates</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>Source Files\Game\States\PlayerStates</Filter>
-    </ClCompile>
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files\Game\States\GameStates</Filter>
     </ClCompile>
