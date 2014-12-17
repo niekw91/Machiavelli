@@ -1,5 +1,10 @@
 #pragma once
 #include "Card.h"
+#include <string>
+#include <vector>
+
+using namespace std;
+
 class CharacterCard :
 	public Card
 {

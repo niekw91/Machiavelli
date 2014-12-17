@@ -7,7 +7,7 @@ class GameObject
 {
 public:
 	GameObject(string name) { _name = name; }
-	virtual ~GameObject();
+	virtual ~GameObject() {}
 
 	string GetName() { return _name; }
 

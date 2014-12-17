@@ -1,4 +1,8 @@
 #include "CardFactory.h"
+#include "Card.h"
+#include "CharacterCard.h"
+#include "GameObject.h"
+#include "BuildingCard.h"
 #include "Game.h"
 
 #include <iostream>
@@ -27,10 +31,15 @@ void CardFactory::CreateCharacterCardsFromFile(std::string filename, std::shared
 			std::cerr << v.at(i) << "\n";
 
 		if (v.size() == 4) {
-			
+			std::vector<std::string> description = std::vector<std::string>();
+			description.push_back(v.at(3));
+			CharacterCard card = CharacterCard(std::stoi(v.at(0)), v.at(1), std::stoi(v.at(2)), description);
 		}
 		else if (v.size() == 5) {
-			
+			std::vector<std::string> description = std::vector<std::string>();
+			description.push_back(v.at(3));
+			description.push_back(v.at(4));
+			CharacterCard card = CharacterCard(std::stoi(v.at(0)), v.at(1), std::stoi(v.at(2)), description);
 		}
 	}
 }

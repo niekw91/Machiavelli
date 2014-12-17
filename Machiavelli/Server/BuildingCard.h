@@ -1,5 +1,14 @@
 #pragma once
 #include "Card.h"
+
+#pragma once
+#include "Card.h"
+
+#include <string>
+#include <vector>
+
+using namespace std;
+
 class BuildingCard :
 	public Card
 {
