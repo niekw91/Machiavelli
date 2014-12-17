@@ -16,7 +16,6 @@
     <ClInclude Include="BishopState.h" />
     <ClInclude Include="BuildingCard.h" />
     <ClInclude Include="Card.h" />
-    <ClInclude Include="CardFactory.h" />
     <ClInclude Include="CardStack.h" />
     <ClInclude Include="CharacterCard.h" />
     <ClInclude Include="ClientCommand.h" />
@@ -25,6 +24,7 @@
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="CardColors.h" />
     <ClInclude Include="KingState.h" />
     <ClInclude Include="MerchantState.h" />
     <ClInclude Include="Player.h" />
@@ -48,10 +48,8 @@
     <ClCompile Include="BishopState.cpp" />
     <ClCompile Include="BuildingCard.cpp" />
     <ClCompile Include="Card.cpp" />
-    <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="CharacterCard.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="KingState.cpp" />
