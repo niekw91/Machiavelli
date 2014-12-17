@@ -76,7 +76,7 @@ ClientCommand Game::GetNextCommand()
 
 void Game::AddPlayer(shared_ptr<Socket> client)
 {
-	_players->push_back(make_unique<Player>(client));
+	_players->push_back(make_unique<Player>(client, shared_from_this()));
 }
 
 int Game::GetPlayerCount() 

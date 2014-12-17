@@ -49,6 +49,12 @@
     <Filter Include="Header Files\Game\GameObjects">
       <UniqueIdentifier>{2354f784-09d5-450a-a5e7-23505320037d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{978acb45-d9cd-400c-ae54-8eb09a3d2880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{328bf607-362d-4fad-97ff-7c75ece4df0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArchitectState.h">
@@ -129,11 +135,14 @@
     <ClInclude Include="PlayerStateMachine.h">
       <Filter>Header Files\Game\States\PlayerStates</Filter>
     </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="Server.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Server</Filter>
     </ClInclude>
     <ClInclude Include="ServerConfig.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files\Server</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +197,6 @@
     <ClCompile Include="BuildingCard.cpp">
       <Filter>Source Files\Game\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="CardStack.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -207,7 +213,10 @@
       <Filter>Source Files\Game\States\PlayerStates</Filter>
     </ClCompile>
     <ClCompile Include="Server.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

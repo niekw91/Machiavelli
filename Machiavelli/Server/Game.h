@@ -2,7 +2,11 @@
 #include <vector>
 #include <queue>
 #include <memory>
+
 #include "ClientCommand.h"
+#include "CardStack.h"
+#include "CharacterCard.h"
+#include "BuildingCard.h"
 
 using namespace std;
 
@@ -40,6 +44,9 @@ private:
 	shared_ptr<GameStateManager> _stateManager;
 	shared_ptr<vector<shared_ptr<Player>>> _players;
 	shared_ptr<std::queue<ClientCommand>> _commands;
+
+	CardStack<CharacterCard> _characterCards;
+	CardStack<BuildingCard> _buildingCards;
 
 	bool _running;
 };
