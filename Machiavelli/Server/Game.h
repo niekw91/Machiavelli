@@ -7,6 +7,7 @@
 #include "CardStack.h"
 #include "CharacterCard.h"
 #include "BuildingCard.h"
+#include "CardFactory.h"
 
 using namespace std;
 
@@ -40,13 +41,18 @@ public:
 	void AddPlayer(shared_ptr<Socket> client);
 	int GetPlayerCount();
 
+	void AddCharacterCard(shared_ptr<CharacterCard> card);
+	void AddBuildingCard(shared_ptr<BuildingCard> card);
+
 private:
 	shared_ptr<GameStateManager> _stateManager;
 	shared_ptr<vector<shared_ptr<Player>>> _players;
 	shared_ptr<std::queue<ClientCommand>> _commands;
 
-	CardStack<CharacterCard> _characterCards;
-	CardStack<BuildingCard> _buildingCards;
+	shared_ptr<CardStack<CharacterCard>> _characterCards;
+	shared_ptr<CardStack<BuildingCard>> _buildingCards;
+
+	shared_ptr<CardFactory> _factory;
 
 	bool _running;
 };

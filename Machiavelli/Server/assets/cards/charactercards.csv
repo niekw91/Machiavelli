@@ -1,8 +1,8 @@
-1;Assassin;
-2;Thief;
-3;Wizard;
-4;King;
-5;Bishop;
-6;Merchant;
-7;Architect;
-8;Warlord;
+1;Assassin;0;Kills another character
+2;Thief;0;Steals from another character
+3;Wizard;0;Switches building cards
+4;King;1;Starts the next round;Receives gold from monuments
+5;Bishop;3;Is protected against the warlord;Receives fold from churches
+6;Merchant;2;Receives an additional peice of gold;Reveices gold from commercial buildings
+7;Architect;0;Gets two additional cards;Can build three buildings
+8;Warlord;4;Destroys a building;Receives gold from all military buildings

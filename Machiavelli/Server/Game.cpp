@@ -10,6 +10,7 @@ Game::Game()
 {
 	_commands = make_shared<std::queue<ClientCommand>>();
 	_players = make_shared<vector<shared_ptr<Player>>>();
+	_factory = make_shared<CardFactory>();
 }
 
 Game::~Game() 
@@ -21,6 +22,10 @@ void Game::Init()
 	// Start server
 	thread server{ Server::Start, shared_from_this() };
 	server.detach();
+
+	// Load cards from file
+	_factory->CreateCharacterCardsFromFile("assets/cards/charactercards.csv", shared_from_this());
+	//_factory->CreateBuildingCardsFromFile("assets/cards/buildingcards.csv", shared_from_this());
 
 	// Create statemanager
 	_stateManager = make_shared<GameStateManager>(shared_from_this());
@@ -82,4 +87,14 @@ void Game::AddPlayer(shared_ptr<Socket> client)
 int Game::GetPlayerCount() 
 {
 	return _players->size();
+}
+
+void Game::AddBuildingCard(shared_ptr<BuildingCard> card)
+{
+	_buildingCards->AddCard(card);
+}
+
+void Game::AddCharacterCard(shared_ptr<CharacterCard> card)
+{
+	_characterCards->AddCard(card);
 }
