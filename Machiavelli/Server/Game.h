@@ -41,8 +41,8 @@ public:
 	void AddPlayer(shared_ptr<Socket> client);
 	int GetPlayerCount();
 
-	void AddCharacterCard(shared_ptr<CharacterCard> card);
-	void AddBuildingCard(shared_ptr<BuildingCard> card);
+	void AddCharacterCard(CharacterCard card);
+	void AddBuildingCard(BuildingCard card);
 
 private:
 	shared_ptr<GameStateManager> _stateManager;

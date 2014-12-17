@@ -8,8 +8,8 @@ template <class card_type>
 class CardStack
 {
 public:
-	CardStack();
-	~CardStack();
+	CardStack(){}
+	~CardStack(){}
 
 	//shared_ptr<card_type> GetNextCard()
 	//{
@@ -19,9 +19,9 @@ public:
 	//	return card;
 	//}
 
-	shared_ptr<card_type> GetCardByIndex(int index)
+	card_type GetCardByIndex(int index)
 	{
-		shared_ptr<card_type> card = _cards.at(index);
+		card_type card = _cards.at(index);
 		EraseCardByIndex(index);
 		return card;
 	}
@@ -31,12 +31,12 @@ public:
 		_cards.erase(index);
 	}
 
-	void AddCard(shared_ptr<card_type> card)
+	void AddCard(card_type card)
 	{
 		_cards.push_back(card);
 	}
 
 private:
-	std::vector<shared_ptr<card_type>> _cards;
+	std::vector<card_type> _cards;
 };
 

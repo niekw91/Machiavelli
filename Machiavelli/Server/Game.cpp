@@ -11,6 +11,8 @@ Game::Game()
 	_commands = make_shared<std::queue<ClientCommand>>();
 	_players = make_shared<vector<shared_ptr<Player>>>();
 	_factory = make_shared<CardFactory>();
+	_buildingCards = make_shared<CardStack<BuildingCard>>();
+	_characterCards = make_shared<CardStack<CharacterCard>>();
 }
 
 Game::~Game() 
@@ -25,7 +27,7 @@ void Game::Init()
 
 	// Load cards from file
 	_factory->CreateCharacterCardsFromFile("assets/cards/charactercards.csv", shared_from_this());
-	//_factory->CreateBuildingCardsFromFile("assets/cards/buildingcards.csv", shared_from_this());
+	_factory->CreateBuildingCardsFromFile("assets/cards/buildingcards.csv", shared_from_this());
 
 	// Create statemanager
 	_stateManager = make_shared<GameStateManager>(shared_from_this());
@@ -89,12 +91,12 @@ int Game::GetPlayerCount()
 	return _players->size();
 }
 
-void Game::AddBuildingCard(shared_ptr<BuildingCard> card)
+void Game::AddBuildingCard(BuildingCard card)
 {
 	_buildingCards->AddCard(card);
 }
 
-void Game::AddCharacterCard(shared_ptr<CharacterCard> card)
+void Game::AddCharacterCard(CharacterCard card)
 {
 	_characterCards->AddCard(card);
 }
