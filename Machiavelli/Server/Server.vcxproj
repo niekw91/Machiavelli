@@ -16,6 +16,7 @@
     <ClInclude Include="BishopState.h" />
     <ClInclude Include="BuildingCard.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="CardFactory.h" />
     <ClInclude Include="CardStack.h" />
     <ClInclude Include="CharacterCard.h" />
     <ClInclude Include="ClientCommand.h" />
@@ -48,6 +49,7 @@
     <ClCompile Include="BishopState.cpp" />
     <ClCompile Include="BuildingCard.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="CharacterCard.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOverState.cpp" />
