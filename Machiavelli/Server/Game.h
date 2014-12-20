@@ -32,13 +32,15 @@ public:
 	void Update(shared_ptr<Game> &game);
 
 	void AddCommand(ClientCommand command);
-	bool HasNextCommand();
-	ClientCommand GetNextCommand();
+	bool HasNextCommand(shared_ptr<Player> &player);
+	ClientCommand GetNextCommand(shared_ptr<Player> &player);
 
 	shared_ptr<GameStateManager> &GetStateManager() { return _stateManager; }
 	shared_ptr<vector<shared_ptr<Player>>> &GetPlayers() { return _players; }
+	shared_ptr<CardStack<CharacterCard>> &GetCharacterCards() { return _characterCards; }
+	shared_ptr<CardStack<BuildingCard>> &GetBuildingCards() { return _buildingCards; }
 
-	void AddPlayer(shared_ptr<Socket> client);
+	void AddPlayer(shared_ptr<Socket> &client);
 	int GetPlayerCount();
 
 	void AddCharacterCard(CharacterCard card);

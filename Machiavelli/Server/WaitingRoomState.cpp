@@ -1,5 +1,5 @@
 #include "WaitingRoomState.h"
-#include "PlayState.h"
+#include "PickCardState.h"
 #include "Game.h"
 #include "Player.h"
 
@@ -29,7 +29,7 @@ void WaitingRoomState::HandleEvents(shared_ptr<Game> &game)
 void WaitingRoomState::Update(shared_ptr<Game> &game)
 {
 	if (game->GetPlayerCount() == 2) {
-		game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<PlayState>()));
+		game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<PickCardState>()));
 	}
 	else {
 		if (_showWelcomeMessage) {

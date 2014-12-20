@@ -26,14 +26,32 @@ public:
 		return card;
 	}
 
+	card_type GetRandomCard()
+	{
+		int index = Random::Next(0, _cards.size() - 1);
+		card_type card = _cards.at(index);
+		EraseCardByIndex(index);
+		return card;
+	}
+
+	card_type ShowCardByIndex(int index)
+	{
+		return _cards.at(index);
+	}
+
 	void EraseCardByIndex(int index)
 	{
-		_cards.erase(index);
+		_cards.erase(_cards.begin() + index);
 	}
 
 	void AddCard(card_type card)
 	{
 		_cards.push_back(card);
+	}
+
+	int Size()
+	{
+		return _cards.size();
 	}
 
 private:

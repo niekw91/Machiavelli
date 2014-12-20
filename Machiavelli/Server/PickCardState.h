@@ -1,20 +1,21 @@
 #pragma once
 #include "GameState.h"
 
-// Forward declaration
 class Game;
 
-class PlayState :
+class PickCardState :
 	public GameState
 {
 public:
-	PlayState();
-	~PlayState();
+	PickCardState();
+	~PickCardState();
 
 	void Init(shared_ptr<Game> &game);
 	void Cleanup(shared_ptr<Game> &game);
 
 	void HandleEvents(shared_ptr<Game> &game);
 	void Update(shared_ptr<Game> &game);
-};
 
+	CharacterCard PickCard(shared_ptr<Player> &player, shared_ptr<Game> &game);
+	void HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game);
+};

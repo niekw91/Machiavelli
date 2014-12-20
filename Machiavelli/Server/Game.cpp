@@ -3,6 +3,7 @@
 #include "GameStateManager.h"
 #include "Server.h"
 #include "Socket.h"
+#include "ClientCommand.h"
 
 #include <thread>
 
@@ -70,18 +71,27 @@ void Game::AddCommand(ClientCommand command)
 	_commands->push(command);
 }
 
-bool Game::HasNextCommand() {
-	return _commands->size() > 0;
+bool Game::HasNextCommand(shared_ptr<Player> &player) {
+	bool has = false;
+
+	if (_commands->size() > 0)  {
+		ClientCommand command = _commands->front();
+		if (command.get_client() == player->GetClient())
+			has = true;
+	}
+	return has;
 }
 
-ClientCommand Game::GetNextCommand()
+ClientCommand Game::GetNextCommand(shared_ptr<Player> &player)
 {
+	while (_commands->front().get_client() != player->GetClient())
+		_commands->pop();
 	ClientCommand command = _commands->front();
 	_commands->pop();
 	return command;
 }
 
-void Game::AddPlayer(shared_ptr<Socket> client)
+void Game::AddPlayer(shared_ptr<Socket> &client)
 {
 	_players->push_back(make_unique<Player>(client, shared_from_this()));
 }

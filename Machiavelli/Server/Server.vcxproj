@@ -28,6 +28,7 @@
     <ClInclude Include="CardColors.h" />
     <ClInclude Include="KingState.h" />
     <ClInclude Include="MerchantState.h" />
+    <ClInclude Include="PickCardState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerStateMachine.h" />
@@ -57,6 +58,7 @@
     <ClCompile Include="KingState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MerchantState.cpp" />
+    <ClCompile Include="PickCardState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerStateMachine.cpp" />
     <ClCompile Include="PlayState.cpp" />
