@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Socket.h"
 #include "Game.h"
+#include "PlayerStateMachine.h"
 
 
 Player::Player(shared_ptr<Socket> &client, shared_ptr<Game> &game) {
@@ -8,6 +9,7 @@ Player::Player(shared_ptr<Socket> &client, shared_ptr<Game> &game) {
 	_game = game;
 	_hasCrown = false;
 
+	_stateMachine = make_shared<PlayerStateMachine>();
 	_buildingCards = make_shared<CardStack<BuildingCard>>();
 	_characterCards = make_shared<CardStack<CharacterCard>>();
 	_buildings = make_shared<CardStack<BuildingCard>>();

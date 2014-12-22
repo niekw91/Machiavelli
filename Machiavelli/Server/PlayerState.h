@@ -1,6 +1,8 @@
 #pragma once
 #include "Player.h"
 #include "PlayerStateMachine.h"
+#include "Socket.h"
+
 #include <memory>
 
 class PlayerState

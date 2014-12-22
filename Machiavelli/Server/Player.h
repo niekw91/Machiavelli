@@ -7,6 +7,7 @@
 
 class Socket;
 class Game;
+class PlayerStateMachine;
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
 
 	void AddCharacterCard(CharacterCard card);
 	void RemoveCharacterCard(int index);
+	shared_ptr<CardStack<CharacterCard>> GetCharacterCards() { return _characterCards; }
 	BuildingCard GetBuildingCard(int index);
 	void AddBuildingCard(BuildingCard card);
 	void Build(BuildingCard card);
@@ -30,7 +32,9 @@ public:
 	int GetGoldAmount() { return _gold;  }
 	void AddGold(int amount) { _gold += amount; }
 	void RemoveGold(int amount) { _gold -= amount; }
+	shared_ptr<PlayerStateMachine> GetStateMachine() { return _stateMachine; }
 private:
+	shared_ptr<PlayerStateMachine> _stateMachine;
 	shared_ptr<Socket> _client;
 	shared_ptr<Game> _game;
 
