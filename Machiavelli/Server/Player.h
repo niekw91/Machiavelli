@@ -27,12 +27,14 @@ public:
 	shared_ptr<CardStack<CharacterCard>> GetCharacterCards() { return _characterCards; }
 	BuildingCard GetBuildingCard(int index);
 	void AddBuildingCard(BuildingCard card);
+	shared_ptr<CardStack<BuildingCard>> GetBuildingCards() { return _buildingCards; }
 	void Build(BuildingCard card);
 	int NumberOfCharacterCards() { return _characterCards->Size(); }
 	int GetGoldAmount() { return _gold;  }
 	void AddGold(int amount) { _gold += amount; }
 	void RemoveGold(int amount) { _gold -= amount; }
 	shared_ptr<PlayerStateMachine> GetStateMachine() { return _stateMachine; }
+	shared_ptr<CardStack<BuildingCard>> GetBuildings() { return _buildings; }
 private:
 	shared_ptr<PlayerStateMachine> _stateMachine;
 	shared_ptr<Socket> _client;
