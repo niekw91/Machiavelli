@@ -51,7 +51,7 @@ void PickCardState::Update(shared_ptr<Game> &game)
 	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
 		if (players->at(i)->NumberOfCharacterCards() == 2)
 			game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<PlayState>()));
-		if (players->at(i)->HasCrown()) {
+		else if (players->at(i)->HasCrown()) {
 			HandleTurn(players->at(i), game);
 			if (i == 0)
 				HandleTurn(players->at(1), game);
