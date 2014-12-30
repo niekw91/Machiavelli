@@ -39,14 +39,14 @@ void AssassinState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 
 void AssassinState::UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
-	player->GetClient()->write("\nYou are allowed to assinate one of the following players:\n");
-	player->GetClient()->write("[0] Thief\n");
-	player->GetClient()->write("[1] Wizard\n");
-	player->GetClient()->write("[2] King\n");
-	player->GetClient()->write("[3] Bishop\n");
-	player->GetClient()->write("[4] Merchant\n");
-	player->GetClient()->write("[5] Architect\n");
-	player->GetClient()->write("[6] Warlord\n");
+	player->GetClient()->writeline("\nYou are allowed to assinate one of the following players:");
+	player->GetClient()->writeline("[0] Thief");
+	player->GetClient()->writeline("[1] Wizard");
+	player->GetClient()->writeline("[2] King");
+	player->GetClient()->writeline("[3] Bishop");
+	player->GetClient()->writeline("[4] Merchant");
+	player->GetClient()->writeline("[5] Architect");
+	player->GetClient()->writeline("[6] Warlord");
 
 	int choice = -1;
 	do {

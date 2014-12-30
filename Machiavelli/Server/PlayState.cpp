@@ -24,7 +24,7 @@ void PlayState::Init(shared_ptr<Game> &game)
 {
 	auto players = game->GetPlayers();
 	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
-		players->at(i)->GetClient()->write("Starting game!\n");
+		players->at(i)->GetClient()->writeline("Starting game!");
 	}
 	
 	game->GenerateOrder();

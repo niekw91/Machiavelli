@@ -49,6 +49,7 @@ public:
 	ssize_t read(char *buf, size_t maxlen);
 	std::string readline();
 
+	void writeline(const std::string &msg);
 	void write(const std::string& msg);
 	void write(const char *buf, size_t len);
 };
