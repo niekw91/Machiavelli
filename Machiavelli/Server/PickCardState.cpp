@@ -74,7 +74,7 @@ CharacterCard PickCardState::PickCard(shared_ptr<Player> &player, shared_ptr<Gam
 {
 	shared_ptr<CardStack<CharacterCard>> characterCards = game->GetCharacterCards();
 	for (size_t j = 0, jlen = characterCards->Size(); j < jlen; ++j)
-		player->GetClient()->writeline(std::to_string(j) + " - " + characterCards->ShowCardByIndex(j).GetName());
+		player->GetClient()->writeline("  " + std::to_string(j) + " " + characterCards->ShowCardByIndex(j).GetName());
 	// Wait fot command callback
 	while (!game->HasNextCommand(player)) {}
 	// Get next command for current player
