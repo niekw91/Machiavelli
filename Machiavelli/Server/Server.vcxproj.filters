@@ -147,11 +147,11 @@
     <ClInclude Include="CardColors.h">
       <Filter>Header Files\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="CardFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PickCardState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CardFactory.h">
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,14 +224,14 @@
     <ClCompile Include="Random.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="CardFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PickCardState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
+    <ClCompile Include="PickCardState.cpp">
+      <Filter>Source Files\Game\States\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CardFactory.cpp">
+      <Filter>Source Files\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

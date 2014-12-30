@@ -5,27 +5,27 @@
 
 void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 {
-	player->GetClient()->write("You are the: " + character + "\n");
-	player->GetClient()->write("Gold: " + std::to_string(player->GetGoldAmount()) + "\n");
+	player->GetClient()->writeline("You are the: " + character);
+	player->GetClient()->writeline("Gold: " + std::to_string(player->GetGoldAmount()));
 
 	shared_ptr<CardStack<BuildingCard>> buildings = player->GetBuildings();
 
-	player->GetClient()->write("\nBuildings:\n");
+	player->GetClient()->writeline("Buildings:");
 	for (size_t i = 0, blen = buildings->Size(); i < blen; ++i) {
 		std::string name = buildings->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
-		player->GetClient()->write(name + "(" + color + "," + value + ")\n");
+		player->GetClient()->writeline(name + "(" + color + "," + value + ")");
 	}
 
 	shared_ptr<CardStack<BuildingCard>> buildingCards = player->GetBuildingCards();
 
-	player->GetClient()->write("\nCards in hand:\n");
+	player->GetClient()->writeline("Cards in hand:");
 	for (size_t i = 0, blen = buildingCards->Size(); i < blen; ++i) {
 		std::string name = buildingCards->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildingCards->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildingCards->ShowCardByIndex(i).GetValue());
-		player->GetClient()->write(name + "(" + color + "," + value + ")\n");
+		player->GetClient()->writeline(name + "(" + color + "," + value + ")");
 	}
 
 	RenderChoices(player);
@@ -33,12 +33,12 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 
 void PlayerState::RenderChoices(shared_ptr<Player> &player)
 {
-	player->GetClient()->write("\nMake your choice:\n");
-	player->GetClient()->write("[0] Show opponent buildings and gold\n");
-	player->GetClient()->write("[1] Take 2 gold pieces\n");
-	player->GetClient()->write("[2] Take 2 building cards and put 1 away\n");
-	player->GetClient()->write("[3] Use character ability\n");
-	player->GetClient()->write("[4] End turn\n");
+	player->GetClient()->writeline("Make your choice:");
+	player->GetClient()->writeline("[0] Show opponent buildings and gold");
+	player->GetClient()->writeline("[1] Take 2 gold pieces");
+	player->GetClient()->writeline("[2] Take 2 building cards and put 1 away");
+	player->GetClient()->writeline("[3] Use character ability");
+	player->GetClient()->writeline("[4] End turn");
 }
 
 int PlayerState::HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game, int range)
