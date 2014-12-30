@@ -230,5 +230,8 @@
     <ClCompile Include="PickCardState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Source Files\Game\States\PlayerStates</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

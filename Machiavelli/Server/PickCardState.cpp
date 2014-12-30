@@ -27,7 +27,9 @@ void PickCardState::Init(shared_ptr<Game> &game)
 
 	// Give each player 2 gold peices and 4 building cards
 	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
-		players->at(i)->AddGold(2);
+		int amount = game->RemoveGold(2);
+		if (amount != -1)
+			players->at(i)->AddGold(2);
 		for (size_t b = 0; b < 4; b++)
 			players->at(i)->AddBuildingCard(game->GetBuildingCards()->GetRandomCard());
 	}

@@ -60,6 +60,7 @@
     <ClCompile Include="MerchantState.cpp" />
     <ClCompile Include="PickCardState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerStateMachine.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Random.cpp" />

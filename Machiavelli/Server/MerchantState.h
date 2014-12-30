@@ -1,8 +1,6 @@
 #pragma once
 #include "PlayerState.h"
 
-class Player;
-
 class MerchantState :
 	public PlayerState
 {
@@ -11,10 +9,12 @@ public:
 	~MerchantState();
 
 
-	void Init(shared_ptr<Player> &player);
-	void Cleanup(shared_ptr<Player> &player);
+	void Init(shared_ptr<Player> &player, shared_ptr<Game> &game);
+	void Cleanup(shared_ptr<Player> &player, shared_ptr<Game> &game);
 
-	void HandleEvents(shared_ptr<Player> &player);
-	void Update(shared_ptr<Player> &player);
+	void HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &game);
+	void Update(shared_ptr<Player> &player, shared_ptr<Game> &game);
+
+	void UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game);
 };
 

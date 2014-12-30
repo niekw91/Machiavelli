@@ -14,6 +14,10 @@ Game::Game()
 	_factory = make_shared<CardFactory>();
 	_buildingCards = make_shared<CardStack<BuildingCard>>();
 	_characterCards = make_shared<CardStack<CharacterCard>>();
+	_characterMap = make_shared<std::map<Game::Character, std::string>>();
+	_orderQueue = make_shared<std::queue<Character>>();
+
+	_gold = GOLD_AMOUNT;
 }
 
 Game::~Game() 
@@ -109,4 +113,50 @@ void Game::AddBuildingCard(BuildingCard card)
 void Game::AddCharacterCard(CharacterCard card)
 {
 	_characterCards->AddCard(card);
+}
+
+void Game::AddGold(int amount)
+{
+	if (!(_gold += amount) > 30)
+		_gold += amount;
+}
+
+int Game::RemoveGold(int amount)
+{
+	if (!(_gold -= amount) < 0) {
+		_gold -= amount;
+		return amount;
+	}
+	else {
+		return -1;
+	}
+}
+
+void Game::KillCharacter(Character character)
+{
+	_flagForKill = character;
+}
+
+void Game::GenerateOrder()
+{
+	_orderQueue->push(ASSASSIN);
+	_orderQueue->push(THIEF);
+	_orderQueue->push(WIZARD);
+	_orderQueue->push(KING);
+	_orderQueue->push(BISHOP);
+	_orderQueue->push(MERCHANT);
+	_orderQueue->push(ARCHITECT);
+	_orderQueue->push(WARLORD);
+}
+
+void Game::GenerateMap()
+{
+	_characterMap->insert(std::make_pair(ASSASSIN, "Assassin"));
+	_characterMap->insert(std::make_pair(THIEF, "Thief"));
+	_characterMap->insert(std::make_pair(WIZARD, "Wizard"));
+	_characterMap->insert(std::make_pair(KING, "King"));
+	_characterMap->insert(std::make_pair(BISHOP, "Bishop"));
+	_characterMap->insert(std::make_pair(MERCHANT, "Merchant"));
+	_characterMap->insert(std::make_pair(ARCHITECT, "Architect"));
+	_characterMap->insert(std::make_pair(WARLORD, "Warlord"));
 }

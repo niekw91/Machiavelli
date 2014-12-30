@@ -2,6 +2,8 @@
 #include <vector>
 #include <queue>
 #include <memory>
+#include <queue>
+#include <map>
 
 #include "ClientCommand.h"
 #include "CardStack.h"
@@ -19,6 +21,8 @@ class Socket;
 class Game : public enable_shared_from_this<Game>
 {
 public:
+	enum Character { ARCHITECT, ASSASSIN, BISHOP, KING, MERCHANT, THIEF, WARLORD, WIZARD };
+
 	Game();
 	virtual ~Game();
 
@@ -45,16 +49,32 @@ public:
 
 	void AddCharacterCard(CharacterCard card);
 	void AddBuildingCard(BuildingCard card);
+	void AddGold(int amount);
+	int RemoveGold(int amount);
 
+	void GenerateOrder();
+	void KillCharacter(Character character);
+	void GenerateMap();
+	shared_ptr<std::queue<Character>> GetOrderQueue() { return _orderQueue; }
+	shared_ptr<std::map<Game::Character, std::string>> GetCharacterMap() { return _characterMap; }
+	bool HasBeenKilled(Character character) { return _flagForKill == character; }
 private:
+	const int GOLD_AMOUNT{ 30 };
+
 	shared_ptr<GameStateManager> _stateManager;
 	shared_ptr<vector<shared_ptr<Player>>> _players;
 	shared_ptr<std::queue<ClientCommand>> _commands;
+
+	shared_ptr<std::queue<Character>> _orderQueue;
+	shared_ptr<std::map<Game::Character, std::string>> _characterMap;
+	Character _flagForKill;
 
 	shared_ptr<CardStack<CharacterCard>> _characterCards;
 	shared_ptr<CardStack<BuildingCard>> _buildingCards;
 
 	shared_ptr<CardFactory> _factory;
+
+	int _gold;
 
 	bool _running;
 };
