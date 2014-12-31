@@ -54,7 +54,6 @@ void PlayState::Update(shared_ptr<Game> &game)
 			{
 			case Game::ASSASSIN:
 			{
-
 				shared_ptr<Player> player = HasCharacterCard(Game::ASSASSIN, game);
 				if (player) {
 					player->GetStateMachine()->ChangeState(player, game, dynamic_pointer_cast<PlayerState>(make_shared<AssassinState>()));

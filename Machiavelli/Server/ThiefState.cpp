@@ -31,6 +31,7 @@ void ThiefState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 	int choice = -1;
 	while (choice != 4) {
 		do {
+			RenderChoices(player);
 			choice = HandleChoice(player, game, 4);
 		} while (choice == -1);
 		HandleTurn(player, game, choice);

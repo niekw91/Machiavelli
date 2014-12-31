@@ -27,8 +27,6 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 		std::string value = std::to_string(buildingCards->ShowCardByIndex(i).GetValue());
 		player->GetClient()->writeline("  - " + name + "(" + color + "," + value + ")");
 	}
-
-	RenderChoices(player);
 }
 
 void PlayerState::RenderChoices(shared_ptr<Player> &player)
@@ -88,8 +86,10 @@ void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &g
 void PlayerState::TakeGold(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount)
 {
 	int gold = game->RemoveGold(amount);
-	if (gold != -1)
+	if (gold != -1) {
 		player->AddGold(gold);
+		player->GetClient()->writeline("You received " + std::to_string(gold) + " gold");
+	}
 }
 
 void PlayerState::TakeBuildingCards(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount)

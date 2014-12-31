@@ -117,18 +117,18 @@ void Game::AddCharacterCard(CharacterCard card)
 
 void Game::AddGold(int amount)
 {
-	if (!(_gold += amount) > 30)
-		_gold += amount;
+	_gold += amount;
+	if (_gold > GOLD_AMOUNT)
+		_gold = GOLD_AMOUNT;
 }
 
 int Game::RemoveGold(int amount)
 {
-	if (!(_gold -= amount) < 0) {
-		_gold -= amount;
-		return amount;
+	if ((_gold -= amount) < 0) {
+		return -1;
 	}
 	else {
-		return -1;
+		return amount;
 	}
 }
 
