@@ -80,7 +80,24 @@ void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game,
 
 void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
+	// Determine opponent
+	shared_ptr<Player> opponent;
+	if (game->GetPlayers()->front() == player)
+		opponent = game->GetPlayers()->back;
+	else
+		opponent = game->GetPlayers()->front;
+	player->GetClient()->writeline("Opponent:");
+	player->GetClient()->writeline("Gold: " + std::to_string(opponent->GetGoldAmount()));
 
+	shared_ptr<CardStack<BuildingCard>> buildings = opponent->GetBuildings();
+
+	player->GetClient()->writeline("\r\nBuildings:");
+	for (size_t i = 0, blen = buildings->Size(); i < blen; ++i) {
+		std::string name = buildings->ShowCardByIndex(i).GetName();
+		std::string color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
+		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
+		player->GetClient()->writeline("  - " + name + "(" + color + "," + value + ")");
+	}
 }
 
 void PlayerState::TakeGold(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount)
@@ -94,6 +111,6 @@ void PlayerState::TakeGold(shared_ptr<Player> &player, shared_ptr<Game> &game, i
 
 void PlayerState::TakeBuildingCards(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount)
 {
-	for (size_t i = 0; i < amount; i++)
+	for (int i = 0; i < amount; i++)
 		player->AddBuildingCard(game->GetBuildingCards()->GetRandomCard());
 }

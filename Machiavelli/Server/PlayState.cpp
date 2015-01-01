@@ -164,9 +164,9 @@ void PlayState::StealGold(Game::Character character, shared_ptr<Game> &game)
 	shared_ptr<Player> thief = HasCharacterCard(Game::THIEF, game);
 	shared_ptr<Player> victim = HasCharacterCard(character, game);
 	int stolenGold = victim->GetGoldAmount();
-	string victimName = "";
+	string victimName = game->GetCharacterMap()->find(character)->second;
 	victim->RemoveGold(stolenGold);
 	victim->GetClient()->writeline("A thief has stolen all your gold!");
 	thief->AddGold(stolenGold);
-	thief->GetClient()->writeline("You have stolen " + to_string(stolenGold) + " gold!");
+	thief->GetClient()->writeline("You have stolen " + to_string(stolenGold) + " gold " + victimName + "!");
 }
