@@ -61,6 +61,7 @@ public:
 	void StealFrom(Character character);
 	bool IsThiefTarget(Character character) { return _flagForSteal == character; }
 
+	shared_ptr<Player> GetOpponent(shared_ptr<Player> &player);
 private:
 	const int GOLD_AMOUNT{ 30 };
 

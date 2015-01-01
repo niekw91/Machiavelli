@@ -81,11 +81,7 @@ void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game,
 void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	// Determine opponent
-	shared_ptr<Player> opponent;
-	if (game->GetPlayers()->front() == player)
-		opponent = game->GetPlayers()->back();
-	else
-		opponent = game->GetPlayers()->front();
+	shared_ptr<Player> opponent = game->GetOpponent(player);
 
 	// Show opponent information
 	player->GetClient()->writeline("Opponent:");

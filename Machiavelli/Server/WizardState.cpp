@@ -40,5 +40,31 @@ void WizardState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 
 void WizardState::UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
+	player->GetClient()->writeline("Use magic to:");
+	player->GetClient()->writeline("  [0] Switch your and your opponent's cards");
+	player->GetClient()->writeline("  [1] Discard from hand and draw the same amount of cards");
+	
+	int choice = -1;
+	int discarded = 0;
+	auto cards = player->GetBuildingCards();
 
+	do {
+		choice = HandleChoice(player, game, 2);
+	} while (choice == -1);
+
+	switch (choice)
+	{
+	case 0:
+		player->GetBuildingCards().swap(game->GetOpponent(player)->GetBuildingCards());
+		break;
+	case 1:
+		choice = -1;
+		do {
+			choice = HandleChoice(player, game, 2);
+		} while (choice == -1);
+
+		break;
+	default:
+		break;
+	}
 }

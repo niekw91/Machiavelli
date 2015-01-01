@@ -15,5 +15,8 @@ public:
 	void Update(shared_ptr<Player> &player, shared_ptr<Game> &game);
 
 	void UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game);
+
+private:
+	void SwitchCards();
 };
 

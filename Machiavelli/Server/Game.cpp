@@ -142,6 +142,17 @@ void Game::StealFrom(Character character)
 	_flagForSteal = character;
 }
 
+shared_ptr<Player> Game::GetOpponent(shared_ptr<Player> &player)
+{
+	// Determine opponent
+	shared_ptr<Player> opponent;
+	if (GetPlayers()->front() == player)
+		opponent = GetPlayers()->back();
+	else
+		opponent = GetPlayers()->front();
+	return opponent;
+}
+
 void Game::GenerateOrder()
 {
 	_orderQueue->push(ASSASSIN);
