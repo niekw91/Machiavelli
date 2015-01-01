@@ -83,9 +83,11 @@ void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &g
 	// Determine opponent
 	shared_ptr<Player> opponent;
 	if (game->GetPlayers()->front() == player)
-		opponent = game->GetPlayers()->back;
+		opponent = game->GetPlayers()->back();
 	else
-		opponent = game->GetPlayers()->front;
+		opponent = game->GetPlayers()->front();
+
+	// Show opponent information
 	player->GetClient()->writeline("Opponent:");
 	player->GetClient()->writeline("Gold: " + std::to_string(opponent->GetGoldAmount()));
 
