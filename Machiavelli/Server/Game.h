@@ -21,7 +21,7 @@ class Socket;
 class Game : public enable_shared_from_this<Game>
 {
 public:
-	enum Character { ARCHITECT, ASSASSIN, BISHOP, KING, MERCHANT, THIEF, WARLORD, WIZARD };
+	enum Character { ARCHITECT, ASSASSIN, BISHOP, KING, MERCHANT, THIEF, WARLORD, WIZARD, LAST_CHARACTER };
 
 	Game();
 	virtual ~Game();
@@ -54,10 +54,13 @@ public:
 
 	void GenerateOrder();
 	void KillCharacter(Character character);
+	bool HasBeenKilled(Character character) { return _flagForKill == character; }
 	void GenerateMap();
 	shared_ptr<std::queue<Character>> GetOrderQueue() { return _orderQueue; }
 	shared_ptr<std::map<Game::Character, std::string>> GetCharacterMap() { return _characterMap; }
-	bool HasBeenKilled(Character character) { return _flagForKill == character; }
+	void StealFrom(Character character);
+	bool IsThiefTarget(Character character) { return _flagForSteal == character; }
+
 private:
 	const int GOLD_AMOUNT{ 30 };
 
@@ -68,6 +71,7 @@ private:
 	shared_ptr<std::queue<Character>> _orderQueue;
 	shared_ptr<std::map<Game::Character, std::string>> _characterMap;
 	Character _flagForKill;
+	Character _flagForSteal;
 
 	shared_ptr<CardStack<CharacterCard>> _characterCards;
 	shared_ptr<CardStack<BuildingCard>> _buildingCards;

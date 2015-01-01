@@ -41,7 +41,7 @@ void PlayerState::RenderChoices(shared_ptr<Player> &player)
 
 int PlayerState::HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game, int range)
 {
-	// Wait fot command callback
+	// Wait for command callback
 	while (!game->HasNextCommand(player)) {}
 	// Get next command for current player
 	ClientCommand command = game->GetNextCommand(player);

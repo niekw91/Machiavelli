@@ -18,5 +18,6 @@ public:
 	void Update(shared_ptr<Game> &game);
 private:
 	shared_ptr<Player> HasCharacterCard(Game::Character character, shared_ptr<Game> &game);
+	void StealGold(Game::Character character, shared_ptr<Game> &game);
 };
 

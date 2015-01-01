@@ -137,6 +137,11 @@ void Game::KillCharacter(Character character)
 	_flagForKill = character;
 }
 
+void Game::StealFrom(Character character)
+{
+	_flagForSteal = character;
+}
+
 void Game::GenerateOrder()
 {
 	_orderQueue->push(ASSASSIN);

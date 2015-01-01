@@ -40,7 +40,7 @@ void AssassinState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 
 void AssassinState::UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
-	player->GetClient()->writeline("\nYou are allowed to assinate one of the following players:");
+	player->GetClient()->writeline("\nYou are allowed to assassinate one of the following players:");
 	player->GetClient()->writeline("[0] Thief");
 	player->GetClient()->writeline("[1] Wizard");
 	player->GetClient()->writeline("[2] King");
