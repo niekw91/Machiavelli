@@ -36,7 +36,10 @@ public:
 	void LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &game);
 	void TakeGold(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
 	void TakeBuildingCards(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
+	void Build(shared_ptr<Player> &player, shared_ptr<Game> &game);
 private:
 	vector<Option> _basicChoices;
+protected:
+	bool _endTurn;
 };
 

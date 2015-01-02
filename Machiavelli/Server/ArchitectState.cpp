@@ -30,7 +30,7 @@ void ArchitectState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 	Render(player, "Architect");
 	ResetChoices(player, game);
 	int choice = -1;
-	while (choice != 4) {
+	while (choice != GetNumberOfChoices() - 1) {
 		do {
 			RenderChoices(player);
 			choice = HandleChoice(player, game, 4);

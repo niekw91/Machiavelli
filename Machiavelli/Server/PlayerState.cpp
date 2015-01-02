@@ -34,7 +34,7 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 		std::string name = buildingCards->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildingCards->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildingCards->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  - " + name + "(" + color + "," + value + ")");
+		player->GetClient()->writeline(std::to_string(i) + " - " + name + "(" + color + "," + value + ")");
 	}
 }
 
@@ -52,8 +52,11 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 	_basicChoices.push_back(Option(" Use character ability", false, (function<void()>)[&] {
 		UseAbility(player, game);
 	}));
+	_basicChoices.push_back(Option(" Build building", false, (function<void()>)[&] {
+		Build(player, game);
+	}));
 	_basicChoices.push_back(Option(" End turn", true, (function<void()>)[&] {
-		LookAtOpponent(player, game); 
+		_endTurn = true;
 	}));
 }
 
@@ -134,4 +137,28 @@ void PlayerState::TakeBuildingCards(shared_ptr<Player> &player, shared_ptr<Game>
 {
 	for (int i = 0; i < amount; i++)
 		player->AddBuildingCard(game->GetBuildingCards()->GetRandomCard());
+}
+
+void PlayerState::Build(shared_ptr<Player> &player, shared_ptr<Game> &game)
+{
+	RenderCardsInHand(player);
+
+	player->GetClient()->writeline("\nWhat building do you want to build?");
+
+	int choice = -1;
+	do {
+		choice = HandleChoice(player, game, player->GetBuildingCards()->Size() - 1);
+	} while (choice == -1);
+
+	BuildingCard card = player->GetBuildingCard(choice);
+	if (player->GetGoldAmount() >= card.GetValue()) {
+		player->RemoveGold(card.GetValue());
+		game->AddGold(card.GetValue());
+		player->Build(card);
+		player->GetClient()->writeline("Successfully built " + card.GetName());
+	}
+	else {
+		player->AddBuildingCard(card);
+		player->GetClient()->writeline("Not enough gold available to build " + card.GetName());
+	}
 }
