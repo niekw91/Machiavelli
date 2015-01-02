@@ -40,19 +40,19 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 
 void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
-	_basicChoices.push_back(Choice(" Show opponent buildings and gold", (function<void()>)[&] { 
+	_basicChoices.push_back(Option(" Show opponent buildings and gold", true, (function<void()>)[&] { 
 		LookAtOpponent(player, game); 
 	}));
-	_basicChoices.push_back(Choice(" Take 2 gold pieces", (function<void()>)[&] { 
+	_basicChoices.push_back(Option(" Take 2 gold pieces", false, (function<void()>)[&] {
 		TakeGold(player, game, 2);
 	}));
-	_basicChoices.push_back(Choice(" Take 2 building cards and put 1 away", (function<void()>)[&] { 
+	_basicChoices.push_back(Option(" Take 2 building cards and put 1 away", false, (function<void()>)[&] {
 		TakeBuildingCards(player, game, 2);
 	}));
-	_basicChoices.push_back(Choice(" Use character ability", (function<void()>)[&] { 
+	_basicChoices.push_back(Option(" Use character ability", false, (function<void()>)[&] {
 		UseAbility(player, game);
 	}));
-	_basicChoices.push_back(Choice(" End turn", (function<void()>)[&] { 
+	_basicChoices.push_back(Option(" End turn", true, (function<void()>)[&] {
 		LookAtOpponent(player, game); 
 	}));
 }
@@ -92,7 +92,8 @@ int PlayerState::HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game
 void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game, int choice)
 {
 	_basicChoices.at(choice).doAction();
-	RemoveChoice(choice);
+	if (!_basicChoices.at(choice).isPermanent())
+		RemoveChoice(choice);
 }
 
 void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &game)

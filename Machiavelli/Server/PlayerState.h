@@ -37,6 +37,6 @@ public:
 	void TakeGold(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
 	void TakeBuildingCards(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
 private:
-	vector<Choice> _basicChoices;
+	vector<Option> _basicChoices;
 };
 
