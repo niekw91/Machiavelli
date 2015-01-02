@@ -72,10 +72,9 @@ void PlayState::Update(shared_ptr<Game> &game)
 			}
 			case Game::WIZARD:
 			{
-				if (game->IsThiefTarget(next)) StealGold(next, game);
-
 				shared_ptr<Player> player = HasCharacterCard(Game::WIZARD, game);
 				if (player) {
+					if (game->IsThiefTarget(next)) StealGold(next, game);
 					player->GetStateMachine()->ChangeState(player, game, dynamic_pointer_cast<PlayerState>(make_shared<WizardState>()));
 					player->GetStateMachine()->Update(player, game);
 				}
@@ -83,10 +82,9 @@ void PlayState::Update(shared_ptr<Game> &game)
 			}
 			case Game::KING:
 			{
-				if (game->IsThiefTarget(next)) StealGold(next, game);
-
 				shared_ptr<Player> player = HasCharacterCard(Game::KING, game);
 				if (player) {
+					if (game->IsThiefTarget(next)) StealGold(next, game);
 					player->GetStateMachine()->ChangeState(player, game, dynamic_pointer_cast<PlayerState>(make_shared<KingState>()));
 					player->GetStateMachine()->Update(player, game);
 				}
@@ -94,10 +92,9 @@ void PlayState::Update(shared_ptr<Game> &game)
 			}
 			case Game::BISHOP:
 			{
-				if (game->IsThiefTarget(next)) StealGold(next, game);
-
 				shared_ptr<Player> player = HasCharacterCard(Game::BISHOP, game);
 				if (player) {
+					if (game->IsThiefTarget(next)) StealGold(next, game);
 					player->GetStateMachine()->ChangeState(player, game, dynamic_pointer_cast<PlayerState>(make_shared<BishopState>()));
 					player->GetStateMachine()->Update(player, game);
 				}
@@ -105,10 +102,9 @@ void PlayState::Update(shared_ptr<Game> &game)
 			}
 			case Game::MERCHANT:
 			{
-				if (game->IsThiefTarget(next)) StealGold(next, game);
-
 				shared_ptr<Player> player = HasCharacterCard(Game::MERCHANT, game);
 				if (player) {
+					if (game->IsThiefTarget(next)) StealGold(next, game);
 					player->GetStateMachine()->ChangeState(player, game, dynamic_pointer_cast<PlayerState>(make_shared<MerchantState>()));
 					player->GetStateMachine()->Update(player, game);
 				}
@@ -116,10 +112,9 @@ void PlayState::Update(shared_ptr<Game> &game)
 			}
 			case Game::ARCHITECT:
 			{
-				if (game->IsThiefTarget(next)) StealGold(next, game);
-
 				shared_ptr<Player> player = HasCharacterCard(Game::ARCHITECT, game);
 				if (player) {
+					if (game->IsThiefTarget(next)) StealGold(next, game);
 					player->GetStateMachine()->ChangeState(player, game, dynamic_pointer_cast<PlayerState>(make_shared<ArchitectState>()));
 					player->GetStateMachine()->Update(player, game);
 				}
@@ -127,10 +122,9 @@ void PlayState::Update(shared_ptr<Game> &game)
 			}
 			case Game::WARLORD:
 			{
-				if (game->IsThiefTarget(next)) StealGold(next, game);
-
 				shared_ptr<Player> player = HasCharacterCard(Game::WARLORD, game);
 				if (player) {
+					if (game->IsThiefTarget(next)) StealGold(next, game);
 					player->GetStateMachine()->ChangeState(player, game, dynamic_pointer_cast<PlayerState>(make_shared<WarlordState>()));
 					player->GetStateMachine()->Update(player, game);
 				}
@@ -150,7 +144,7 @@ shared_ptr<Player> PlayState::HasCharacterCard(Game::Character character, shared
 		for (size_t c = 0, clen = cards->Size(); c < clen; ++c) {
 			if (cards->ShowCardByIndex(c).GetName() == (*it).second) {
 				// Remove player card from deck
-				players->at(i)->GetCharacterCards()->EraseCardByIndex(c);
+				//players->at(i)->GetCharacterCards()->EraseCardByIndex(c);
 				// Return player
 				return players->at(i);
 			}
@@ -168,5 +162,5 @@ void PlayState::StealGold(Game::Character character, shared_ptr<Game> &game)
 	victim->RemoveGold(stolenGold);
 	victim->GetClient()->writeline("A thief has stolen all your gold!");
 	thief->AddGold(stolenGold);
-	thief->GetClient()->writeline("You have stolen " + to_string(stolenGold) + " gold " + victimName + "!");
+	thief->GetClient()->writeline("You have stolen " + to_string(stolenGold) + " gold from the " + victimName + "!");
 }

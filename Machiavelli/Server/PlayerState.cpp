@@ -111,7 +111,7 @@ void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &g
 		std::string name = buildings->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  - " + name + "(" + color + "," + value + ")");
+		player->GetClient()->writeline(std::to_string(i) + " - " + name + "(" + color + "," + value + ")");
 	}
 }
 
