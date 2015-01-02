@@ -28,7 +28,7 @@ void ThiefState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &game
 void ThiefState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Thief");
-	ResetChoices();
+	ResetChoices(player, game);
 	int choice = -1;
 	while (choice != GetNumberOfChoices()) {
 		do {

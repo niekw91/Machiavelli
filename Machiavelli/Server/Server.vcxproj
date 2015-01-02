@@ -19,6 +19,7 @@
     <ClInclude Include="CardFactory.h" />
     <ClInclude Include="CardStack.h" />
     <ClInclude Include="CharacterCard.h" />
+    <ClInclude Include="Choice.h" />
     <ClInclude Include="ClientCommand.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

@@ -4,6 +4,7 @@
 #include "ClientCommand.h"
 #include "Socket.h"
 #include "PlayerStateMachine.h"
+#include "Choice.h"
 
 #include <memory>
 #include <vector>
@@ -23,7 +24,7 @@ public:
 	virtual void UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game) = 0;
 
 	void Render(shared_ptr<Player> &player, std::string character);
-	void ResetChoices();
+	void ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game);
 	int GetNumberOfChoices() { return _basicChoices.size(); }
 	void RemoveChoice(int index);
 	void RenderChoices(shared_ptr<Player> &player);
@@ -36,6 +37,6 @@ public:
 	void TakeGold(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
 	void TakeBuildingCards(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
 private:
-	std::vector<std::string> _basicChoices;
+	vector<Choice> _basicChoices;
 };
 

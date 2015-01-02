@@ -42,7 +42,7 @@ void BishopState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &gam
 void BishopState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Bishop");
-	ResetChoices();
+	ResetChoices(player, game);
 	int choice = -1;
 	while (choice != GetNumberOfChoices()) {
 		do {

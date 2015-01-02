@@ -38,21 +38,31 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 	}
 }
 
-void PlayerState::ResetChoices()
+void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
-	_basicChoices.push_back(" Show opponent buildings and gold");
-	_basicChoices.push_back(" Take 2 gold pieces");
-	_basicChoices.push_back(" Take 2 building cards and put 1 away");
-	_basicChoices.push_back(" Use character ability");
-	_basicChoices.push_back(" End turn");
+	_basicChoices.push_back(Choice(" Show opponent buildings and gold", (function<void()>)[&] { 
+		LookAtOpponent(player, game); 
+	}));
+	_basicChoices.push_back(Choice(" Take 2 gold pieces", (function<void()>)[&] { 
+		TakeGold(player, game, 2);
+	}));
+	_basicChoices.push_back(Choice(" Take 2 building cards and put 1 away", (function<void()>)[&] { 
+		TakeBuildingCards(player, game, 2);
+	}));
+	_basicChoices.push_back(Choice(" Use character ability", (function<void()>)[&] { 
+		UseAbility(player, game);
+	}));
+	_basicChoices.push_back(Choice(" End turn", (function<void()>)[&] { 
+		LookAtOpponent(player, game); 
+	}));
 }
 
 void PlayerState::RenderChoices(shared_ptr<Player> &player)
 {
 	player->GetClient()->writeline("\r\nMake your choice:");
 
-	for (int i = 0; i < _basicChoices.size(); i++) {
-		player->GetClient()->writeline("[" + std::to_string(i) + "]" + _basicChoices.at(i));
+	for (size_t i = 0; i < _basicChoices.size(); i++) {
+		player->GetClient()->writeline("[" + std::to_string(i) + "]" + _basicChoices.at(i).GetText());
 	}
 }
 
@@ -81,30 +91,7 @@ int PlayerState::HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game
 
 void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game, int choice)
 {
-	switch (choice)
-	{
-	case 0: // Check cards in hand
-		RenderCardsInHand(player);
-		break;
-	case 1: // Check buildings
-		RenderBuildings(player);
-		break;
-	case 2: // Look at opponent cards
-		LookAtOpponent(player, game);
-		break;
-	case 3: // Take 2 gold
-		TakeGold(player, game, 2);
-		break;
-	case 4: // Take 2 building cards
-		TakeBuildingCards(player, game, 2);
-		break;
-	case 5: // Use ability
-		UseAbility(player, game);
-		break;
-	default:
-		break;
-	}
-
+	_basicChoices.at(choice).doAction();
 	RemoveChoice(choice);
 }
 

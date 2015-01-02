@@ -44,7 +44,7 @@ void MerchantState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &g
 void MerchantState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Merchant");
-	ResetChoices();
+	ResetChoices(player, game);
 	int choice = -1;
 	while (choice != GetNumberOfChoices()) {
 		do {

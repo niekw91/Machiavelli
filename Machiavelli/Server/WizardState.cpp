@@ -28,7 +28,7 @@ void WizardState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &gam
 void WizardState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Wizard");
-	ResetChoices();
+	ResetChoices(player, game);
 	int choice = -1;
 	while (choice != GetNumberOfChoices()) {
 		do {

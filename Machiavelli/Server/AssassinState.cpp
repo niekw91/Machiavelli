@@ -28,7 +28,7 @@ void AssassinState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &g
 void AssassinState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Assassin");
-	ResetChoices();
+	ResetChoices(player, game);
 	int choice = -1;
 	while (choice != GetNumberOfChoices()) {
 		do {

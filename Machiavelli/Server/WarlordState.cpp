@@ -42,7 +42,7 @@ void WarlordState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &ga
 void WarlordState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Warlord");
-	ResetChoices();
+	ResetChoices(player, game);
 	int choice = -1;
 	while (choice != GetNumberOfChoices()) {
 		do {
