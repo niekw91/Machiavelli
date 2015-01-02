@@ -53,3 +53,17 @@ void Player::Build(BuildingCard card)
 {
 	_buildings->AddCard(card);
 }
+
+void Player::DestroyByIndex(int index)
+{
+	_buildings->GetCardByIndex(index);
+}
+
+bool Player::HasCharacterCard(std::string name)
+{
+	for (size_t i = 0, len = _characterCards->Size(); i < len; ++i) {
+		if (_characterCards->ShowCardByIndex(i).GetName() == name)
+			return true;
+	}
+	return false;
+}

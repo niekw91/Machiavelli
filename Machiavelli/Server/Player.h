@@ -25,10 +25,12 @@ public:
 	void AddCharacterCard(CharacterCard card);
 	void RemoveCharacterCard(int index);
 	shared_ptr<CardStack<CharacterCard>> GetCharacterCards() { return _characterCards; }
+	bool HasCharacterCard(std::string name);
 	BuildingCard GetBuildingCard(int index);
 	void AddBuildingCard(BuildingCard card);
 	shared_ptr<CardStack<BuildingCard>> GetBuildingCards() { return _buildingCards; }
 	void Build(BuildingCard card);
+	void DestroyByIndex(int index);
 	int NumberOfCharacterCards() { return _characterCards->Size(); }
 	int GetGoldAmount() { return _gold;  }
 	void AddGold(int amount) { _gold += amount; }
