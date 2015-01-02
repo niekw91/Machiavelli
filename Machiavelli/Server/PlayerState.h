@@ -4,7 +4,7 @@
 #include "ClientCommand.h"
 #include "Socket.h"
 #include "PlayerStateMachine.h"
-#include "Choice.h"
+#include "Option.h"
 
 #include <memory>
 #include <vector>

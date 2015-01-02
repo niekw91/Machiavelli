@@ -92,8 +92,13 @@ int PlayerState::HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game
 void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game, int choice)
 {
 	_basicChoices.at(choice).doAction();
-	if (!_basicChoices.at(choice).isPermanent())
+	if (!_basicChoices.at(choice).isPermanent()) {
 		RemoveChoice(choice);
+		for (size_t i = 0, ilen = _basicChoices.size(); i < ilen; ++i) {
+			if (!_basicChoices.at(i).isPermanent())
+				RemoveChoice(i);
+		}
+	}
 }
 
 void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &game)
