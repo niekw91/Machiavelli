@@ -8,6 +8,12 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 	player->GetClient()->writeline("You are the: " + character);
 	player->GetClient()->writeline("Gold: " + std::to_string(player->GetGoldAmount()));
 
+	RenderBuildings(player);
+	RenderCardsInHand(player);
+}
+
+void PlayerState::RenderBuildings(shared_ptr<Player> &player)
+{
 	shared_ptr<CardStack<BuildingCard>> buildings = player->GetBuildings();
 
 	player->GetClient()->writeline("\r\nBuildings:");
@@ -17,7 +23,10 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
 		player->GetClient()->writeline("  - " + name + "(" + color + "," + value + ")");
 	}
+}
 
+void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
+{
 	shared_ptr<CardStack<BuildingCard>> buildingCards = player->GetBuildingCards();
 
 	player->GetClient()->writeline("\r\nCards in hand:");
@@ -41,11 +50,6 @@ void PlayerState::ResetChoices()
 void PlayerState::RenderChoices(shared_ptr<Player> &player)
 {
 	player->GetClient()->writeline("\r\nMake your choice:");
-
-	//std::map<int, std::string>::iterator it;
-	//for (it = _basicChoices.begin(); it != _basicChoices.end(); it++) {
-	//	player->GetClient()->writeline("[" + std::to_string(it->first) + "]" + it->second);
-	//}
 
 	for (int i = 0; i < _basicChoices.size(); i++) {
 		player->GetClient()->writeline("[" + std::to_string(i) + "]" + _basicChoices.at(i));
@@ -79,16 +83,22 @@ void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game,
 {
 	switch (choice)
 	{
-	case 0: // Look at opponent cards
+	case 0: // Check cards in hand
+		RenderCardsInHand(player);
+		break;
+	case 1: // Check buildings
+		RenderBuildings(player);
+		break;
+	case 2: // Look at opponent cards
 		LookAtOpponent(player, game);
 		break;
-	case 1: // Take 2 gold
+	case 3: // Take 2 gold
 		TakeGold(player, game, 2);
 		break;
-	case 2: // Take 2 building cards
+	case 4: // Take 2 building cards
 		TakeBuildingCards(player, game, 2);
 		break;
-	case 3: // Use ability
+	case 5: // Use ability
 		UseAbility(player, game);
 		break;
 	default:

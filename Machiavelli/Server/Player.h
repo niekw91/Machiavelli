@@ -25,18 +25,32 @@ public:
 	void AddCharacterCard(CharacterCard card);
 	void RemoveCharacterCard(int index);
 	shared_ptr<CardStack<CharacterCard>> GetCharacterCards() { return _characterCards; }
+
+	int NumberOfCharacterCards() { return _characterCards->Size(); }
+
 	bool HasCharacterCard(std::string name);
+
 	BuildingCard GetBuildingCard(int index);
 	void AddBuildingCard(BuildingCard card);
+	void RemoveBuildingCard(int index);
 	shared_ptr<CardStack<BuildingCard>> GetBuildingCards() { return _buildingCards; }
+
 	void Build(BuildingCard card);
+
 	void DestroyByIndex(int index);
-	int NumberOfCharacterCards() { return _characterCards->Size(); }
+
 	int GetGoldAmount() { return _gold;  }
 	void AddGold(int amount) { _gold += amount; }
 	void RemoveGold(int amount) { _gold -= amount; }
+
 	shared_ptr<PlayerStateMachine> GetStateMachine() { return _stateMachine; }
 	shared_ptr<CardStack<BuildingCard>> GetBuildings() { return _buildings; }
+
+	void DrawCards(int amount);
+	BuildingCard DrawCard();
+
+	void SetBuildingCards(shared_ptr<CardStack<BuildingCard>> buildingcards);
+
 private:
 	shared_ptr<PlayerStateMachine> _stateMachine;
 	shared_ptr<Socket> _client;
