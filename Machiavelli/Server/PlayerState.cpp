@@ -29,14 +29,32 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 	}
 }
 
+void PlayerState::ResetChoices()
+{
+	_basicChoices.push_back(" Show opponent buildings and gold");
+	_basicChoices.push_back(" Take 2 gold pieces");
+	_basicChoices.push_back(" Take 2 building cards and put 1 away");
+	_basicChoices.push_back(" Use character ability");
+	_basicChoices.push_back(" End turn");
+}
+
 void PlayerState::RenderChoices(shared_ptr<Player> &player)
 {
 	player->GetClient()->writeline("\r\nMake your choice:");
-	player->GetClient()->writeline("  [0] Show opponent buildings and gold");
-	player->GetClient()->writeline("  [1] Take 2 gold pieces");
-	player->GetClient()->writeline("  [2] Take 2 building cards and put 1 away");
-	player->GetClient()->writeline("  [3] Use character ability");
-	player->GetClient()->writeline("  [4] End turn");
+
+	//std::map<int, std::string>::iterator it;
+	//for (it = _basicChoices.begin(); it != _basicChoices.end(); it++) {
+	//	player->GetClient()->writeline("[" + std::to_string(it->first) + "]" + it->second);
+	//}
+
+	for (int i = 0; i < _basicChoices.size(); i++) {
+		player->GetClient()->writeline("[" + std::to_string(i) + "]" + _basicChoices.at(i));
+	}
+}
+
+void PlayerState::RemoveChoice(int index)
+{
+	_basicChoices.erase(_basicChoices.begin() + index);
 }
 
 int PlayerState::HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game, int range)
@@ -76,6 +94,8 @@ void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game,
 	default:
 		break;
 	}
+
+	RemoveChoice(choice);
 }
 
 void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &game)

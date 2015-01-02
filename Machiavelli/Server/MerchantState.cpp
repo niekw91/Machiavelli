@@ -12,11 +12,7 @@ MerchantState::~MerchantState()
 
 void MerchantState::Init(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
-	int gold = game->RemoveGold(1);
-	if (gold != -1) {
-		player->AddGold(gold);
-		player->GetClient()->writeline("You received 1 gold coin!");
-	}
+	TakeGold(player, game, 1);
 
 	int greenBuildings = 0;
 	for (size_t i = 0, blen = player->GetBuildings()->Size(); i < blen; ++i) {
@@ -48,11 +44,12 @@ void MerchantState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &g
 void MerchantState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Merchant");
+	ResetChoices();
 	int choice = -1;
-	while (choice != 4) {
+	while (choice != GetNumberOfChoices()) {
 		do {
 			RenderChoices(player);
-			choice = HandleChoice(player, game, 4);
+			choice = HandleChoice(player, game, GetNumberOfChoices() - 1);
 		} while (choice == -1);
 		HandleTurn(player, game, choice);
 	}

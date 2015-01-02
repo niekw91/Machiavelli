@@ -6,6 +6,7 @@
 #include "PlayerStateMachine.h"
 
 #include <memory>
+#include <vector>
 
 class PlayerState
 {
@@ -22,6 +23,9 @@ public:
 	virtual void UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game) = 0;
 
 	void Render(shared_ptr<Player> &player, std::string character);
+	void ResetChoices();
+	int GetNumberOfChoices() { return _basicChoices.size(); }
+	void RemoveChoice(int index);
 	void RenderChoices(shared_ptr<Player> &player);
 	int HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game, int range);
 	void HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game, int choice);
@@ -29,5 +33,7 @@ public:
 	void LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &game);
 	void TakeGold(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
 	void TakeBuildingCards(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
+private:
+	std::vector<std::string> _basicChoices;
 };
 

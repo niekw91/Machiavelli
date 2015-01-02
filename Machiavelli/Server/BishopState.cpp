@@ -42,11 +42,12 @@ void BishopState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &gam
 void BishopState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Bishop");
+	ResetChoices();
 	int choice = -1;
-	while (choice != 4) {
+	while (choice != GetNumberOfChoices()) {
 		do {
 			RenderChoices(player);
-			choice = HandleChoice(player, game, 4);
+			choice = HandleChoice(player, game, GetNumberOfChoices() - 1);
 		} while (choice == -1);
 		HandleTurn(player, game, choice);
 	}

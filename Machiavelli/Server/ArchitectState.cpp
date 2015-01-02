@@ -28,6 +28,7 @@ void ArchitectState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &
 void ArchitectState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "Architect");
+	ResetChoices();
 	int choice = -1;
 	while (choice != 4) {
 		do {

@@ -28,11 +28,12 @@ void KingState::HandleEvents(shared_ptr<Player> &player, shared_ptr<Game> &game)
 void KingState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	Render(player, "King");
+	ResetChoices();
 	int choice = -1;
-	while (choice != 4) {
+	while (choice != GetNumberOfChoices()) {
 		do {
 			RenderChoices(player);
-			choice = HandleChoice(player, game, 4);
+			choice = HandleChoice(player, game, GetNumberOfChoices() - 1);
 		} while (choice == -1);
 		HandleTurn(player, game, choice);
 	}
