@@ -153,8 +153,8 @@
     <ClInclude Include="CardFactory.h">
       <Filter>Header Files\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Choice.h">
-      <Filter>Source Files\Helpers</Filter>
+    <ClInclude Include="Option.h">
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
