@@ -34,6 +34,11 @@ void Player::AddBuildingCard(BuildingCard card)
 	_buildingCards->AddCard(card);
 }
 
+void Player::RemoveBuildingCard(int index)
+{
+	_buildingCards->EraseCardByIndex(index);
+}
+
 BuildingCard Player::GetBuildingCard(int index)
 {
 	return _buildingCards->GetCardByIndex(index);
@@ -52,4 +57,22 @@ void Player::RemoveCharacterCard(int index)
 void Player::Build(BuildingCard card)
 {
 	_buildings->AddCard(card);
+}
+
+void Player::DrawCards(int amount)
+{
+	for (auto i = 0; i < amount; ++i)
+		this->AddBuildingCard(_game->GetBuildingCards()->GetRandomCard());
+}
+
+BuildingCard Player::DrawCard()
+{
+	auto card = _game->GetBuildingCards()->GetRandomCard();
+	this->AddBuildingCard(card);
+	return card;
+}
+
+void Player::SetBuildingCards(shared_ptr<CardStack<BuildingCard>> buildingcards)
+{
+	_buildingCards = buildingcards;
 }

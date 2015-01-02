@@ -8,6 +8,12 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 	player->GetClient()->writeline("You are the: " + character);
 	player->GetClient()->writeline("Gold: " + std::to_string(player->GetGoldAmount()));
 
+	RenderBuildings(player);
+	RenderCardsInHand(player);
+}
+
+void PlayerState::RenderBuildings(shared_ptr<Player> &player)
+{
 	shared_ptr<CardStack<BuildingCard>> buildings = player->GetBuildings();
 
 	player->GetClient()->writeline("\r\nBuildings:");
@@ -17,7 +23,10 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
 		player->GetClient()->writeline("  - " + name + "(" + color + "," + value + ")");
 	}
+}
 
+void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
+{
 	shared_ptr<CardStack<BuildingCard>> buildingCards = player->GetBuildingCards();
 
 	player->GetClient()->writeline("\r\nCards in hand:");
@@ -32,11 +41,13 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 void PlayerState::RenderChoices(shared_ptr<Player> &player)
 {
 	player->GetClient()->writeline("\r\nMake your choice:");
-	player->GetClient()->writeline("  [0] Show opponent buildings and gold");
-	player->GetClient()->writeline("  [1] Take 2 gold pieces");
-	player->GetClient()->writeline("  [2] Take 2 building cards and put 1 away");
-	player->GetClient()->writeline("  [3] Use character ability");
-	player->GetClient()->writeline("  [4] End turn");
+	player->GetClient()->writeline("  [0] Check cards in hand ");
+	player->GetClient()->writeline("  [1] Check buildings ");
+	player->GetClient()->writeline("  [2] Show opponent buildings and gold");
+	player->GetClient()->writeline("  [3] Take 2 gold pieces");
+	player->GetClient()->writeline("  [4] Take 2 building cards and put 1 away");
+	player->GetClient()->writeline("  [5] Use character ability");
+	player->GetClient()->writeline("  [6] End turn");
 }
 
 int PlayerState::HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game, int range)
@@ -61,16 +72,22 @@ void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game,
 {
 	switch (choice)
 	{
-	case 0: // Look at opponent cards
+	case 0: // Check cards in hand
+		RenderCardsInHand(player);
+		break;
+	case 1: // Check buildings
+		RenderBuildings(player);
+		break;
+	case 2: // Look at opponent cards
 		LookAtOpponent(player, game);
 		break;
-	case 1: // Take 2 gold
+	case 3: // Take 2 gold
 		TakeGold(player, game, 2);
 		break;
-	case 2: // Take 2 building cards
+	case 4: // Take 2 building cards
 		TakeBuildingCards(player, game, 2);
 		break;
-	case 3: // Use ability
+	case 5: // Use ability
 		UseAbility(player, game);
 		break;
 	default:

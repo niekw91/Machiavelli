@@ -23,6 +23,8 @@ public:
 
 	void Render(shared_ptr<Player> &player, std::string character);
 	void RenderChoices(shared_ptr<Player> &player);
+	void RenderBuildings(shared_ptr<Player> &player);
+	void RenderCardsInHand(shared_ptr<Player> &player);
 	int HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game, int range);
 	void HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game, int choice);
 
