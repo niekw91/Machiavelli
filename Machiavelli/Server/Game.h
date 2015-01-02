@@ -22,7 +22,7 @@ class Game : public enable_shared_from_this<Game>
 {
 public:
 	enum Character { ARCHITECT, ASSASSIN, BISHOP, KING, MERCHANT, THIEF, WARLORD, WIZARD, LAST_CHARACTER };
-
+	enum Color { YELLOW = 1, GREEN, BLUE, RED, PURPLE};
 	Game();
 	virtual ~Game();
 
