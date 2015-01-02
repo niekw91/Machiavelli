@@ -24,6 +24,7 @@ public:
 	virtual void UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game) = 0;
 
 	void Render(shared_ptr<Player> &player, std::string character);
+	void ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game, string character);
 	void ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game);
 	int GetNumberOfChoices() { return _basicChoices.size(); }
 	void RemoveChoice(int index);

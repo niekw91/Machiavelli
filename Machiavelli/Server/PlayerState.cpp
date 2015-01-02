@@ -38,26 +38,44 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 	}
 }
 
-void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game)
+void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game, string character)
 {
-	_basicChoices.push_back(Option(" Show opponent buildings and gold", true, (function<void()>)[&] { 
-		LookAtOpponent(player, game); 
+
+	_basicChoices.push_back(Option(" Show opponent buildings and gold", true, (function<void()>)[&] {
+		LookAtOpponent(player, game);
 	}));
 	_basicChoices.push_back(Option(" Take 2 gold pieces", false, (function<void()>)[&] {
 		TakeGold(player, game, 2);
 	}));
-	_basicChoices.push_back(Option(" Take 2 building cards and put 1 away", false, (function<void()>)[&] {
-		TakeBuildingCards(player, game, 2);
-	}));
+	if (character == "Architect")
+		_basicChoices.push_back(Option(" Take 2 building cards", false, (function<void()>)[&] {
+			TakeBuildingCards(player, game, 2);
+		}));
+	else
+		_basicChoices.push_back(Option(" Take 2 building cards and put 1 away", false, (function<void()>)[&] {
+			TakeBuildingCards(player, game, 2);
+			int choice = -1;
+			do {
+				RenderBuildings(player);
+				choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
+			} while (choice == -1);
+			player->RemoveBuildingCard(choice);
+		}));
 	_basicChoices.push_back(Option(" Use character ability", false, (function<void()>)[&] {
 		UseAbility(player, game);
 	}));
-	_basicChoices.push_back(Option(" Build building", false, (function<void()>)[&] {
-		Build(player, game);
-	}));
+	for (int i = 0, ilen = character == "Architect" ? 3 : 1; i < ilen; ++i)
+		_basicChoices.push_back(Option(" Build building", false, (function<void()>)[&] {
+			Build(player, game);
+		}));
 	_basicChoices.push_back(Option(" End turn", true, (function<void()>)[&] {
 		_endTurn = true;
 	}));
+}
+
+void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game)
+{
+	ResetChoices(player, game, "");
 }
 
 void PlayerState::RenderChoices(shared_ptr<Player> &player)
