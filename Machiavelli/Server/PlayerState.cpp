@@ -146,9 +146,29 @@ void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &g
 	player->GetClient()->writeline("\r\nBuildings:");
 	for (size_t i = 0, blen = buildings->Size(); i < blen; ++i) {
 		std::string name = buildings->ShowCardByIndex(i).GetName();
-		std::string color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
+		std::string color;
+		switch (buildings->ShowCardByIndex(i).GetColor()){
+		case Game::BLUE:
+			color = "Blue";
+			break;
+		case Game::RED:
+			color = "Red";
+			break;
+		case Game::PURPLE:
+			color = "Purple";
+			break;
+		case Game::YELLOW:
+			color = "Yellow";
+				break;
+		case Game::GREEN:
+			color = "Green";
+				break;
+		default:
+			color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
+			break;
+		}
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  " + to_string(i) + ". " + name + "(" + color + "," + value + ")");
+		player->GetClient()->writeline("  " + to_string(i) + ". " + name + "(" + color + ", " + value + " gold)");
 	}
 }
 
