@@ -11,7 +11,8 @@
 
 CardFactory::CardFactory()
 {
-
+	_buildingCards = make_shared<CardStack<BuildingCard>>();
+	_characterCards = make_shared<CardStack<CharacterCard>>();
 }
 
 
@@ -37,7 +38,8 @@ void CardFactory::CreateCharacterCardsFromFile(std::string filename, std::shared
 			description.push_back(v.at(4));
 		}
 		CharacterCard card = CharacterCard(std::stoi(v.at(0)), v.at(1), std::stoi(v.at(2)), description);
-		game->AddCharacterCard(card);
+		//game->AddCharacterCard(card);
+		_characterCards->AddCard(card);
 	}
 }
 
@@ -54,11 +56,13 @@ void CardFactory::CreateBuildingCardsFromFile(std::string filename, std::shared_
 		if (v.size() == 5) {
 			description.push_back(v.at(4));
 			BuildingCard card = BuildingCard(std::stoi(v.at(0)), v.at(1), std::stoi(v.at(2)), std::stoi(v.at(3)), description);
-			game->AddBuildingCard(card);
+			//game->AddBuildingCard(card);
+			_buildingCards->AddCard(card);
 		}
 		else {
 			BuildingCard card = BuildingCard(std::stoi(v.at(0)), v.at(1), std::stoi(v.at(2)), std::stoi(v.at(3)));
-			game->AddBuildingCard(card);
+			//game->AddBuildingCard(card);
+			_buildingCards->AddCard(card);
 		}
 	}
 }

@@ -54,6 +54,11 @@ public:
 		return _cards.size();
 	}
 
+	void Clear()
+	{
+		_cards.clear();
+	}
+
 private:
 	std::vector<card_type> _cards;
 };

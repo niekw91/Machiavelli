@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "CharacterCard.h"
 #include "PlayerStateMachine.h"
+#include "GameOverState.h"
 #include "AssassinState.h"
 #include "ThiefState.h"
 #include "BishopState.h"
@@ -141,6 +142,19 @@ void PlayState::Update(shared_ptr<Game> &game)
 			}
 		}
 	}
+	// Check if game is over
+	bool finished = false;
+
+	auto players = game->GetPlayers();
+	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
+		if (players->at(i)->GetBuildings()->Size() >= 8)
+			finished = true;
+	}
+
+	if (finished)
+		game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<GameOverState>()));
+	else
+		game->ResetRound();
 }
 
 shared_ptr<Player> PlayState::HasCharacterCard(Game::Character character, shared_ptr<Game> &game)

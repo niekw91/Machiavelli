@@ -20,6 +20,8 @@ void PickCardState::Init(shared_ptr<Game> &game)
 	std::cerr << "Game: 2 player connected, starting game.\r\n";
 	auto players = game->GetPlayers();
 
+	game->ResetRound();
+
 	// Pick random player to have the crown
 	int random = Random::Next(0, players->size() - 1);
 	players->at(random)->SetCrown(true);
