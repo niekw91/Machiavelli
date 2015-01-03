@@ -35,7 +35,7 @@ void WaitingRoomState::Update(shared_ptr<Game> &game)
 		if (_showWelcomeMessage) {
 			auto players = game->GetPlayers();
 			if (players->size() == 1) {
-				players->at(0)->GetClient()->writeline("Welcome to Machiavelli, please wait for a second player..");
+				players->at(0)->GetClient()->writeline("Welcome to Machiavelli, please wait for a second player..\r\n");
 				_showWelcomeMessage = false;
 			}
 		}

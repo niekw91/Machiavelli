@@ -28,7 +28,7 @@ void PickCardState::Init(shared_ptr<Game> &game)
 		// Pick random player to have the crown
 		int random = Random::Next(0, players->size() - 1);
 		players->at(random)->SetCrown(true);
-		players->at(random)->GetClient()->writeline("You have been given the crown!");
+		players->at(random)->GetClient()->writeline("You have been given the crown!\r\n");
 
 		// Give each player 2 gold peices and 4 building cards
 		for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
@@ -81,8 +81,8 @@ void PickCardState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &gam
 CharacterCard PickCardState::PickCard(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	shared_ptr<CardStack<CharacterCard>> characterCards = game->GetCharacterCards();
-	for (size_t j = 0, jlen = characterCards->Size(); j < jlen; ++j)
-		player->GetClient()->writeline("  " + std::to_string(j) + " " + characterCards->ShowCardByIndex(j).GetName());
+	for (size_t i = 0, ilen = characterCards->Size(); i < ilen; ++i)
+		player->GetClient()->writeline("  " + to_string(i) + ". " + characterCards->ShowCardByIndex(i).GetName());
 	// Wait fot command callback
 	while (!game->HasNextCommand(player)) {}
 	// Get next command for current player
@@ -90,7 +90,7 @@ CharacterCard PickCardState::PickCard(shared_ptr<Player> &player, shared_ptr<Gam
 	char choice[] = "X";
 	choice[0] = command.get_cmd().back();
 	int index = std::atoi(choice) > 0 ? std::atoi(choice) : 0;
-	if (index < 0 || index > characterCards->Size() - 1) {
+	if (index < 0 || index >= characterCards->Size()) {
 		// Invalid index entered
 		//return NULL;
 	}

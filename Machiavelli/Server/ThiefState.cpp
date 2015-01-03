@@ -43,12 +43,12 @@ void ThiefState::Update(shared_ptr<Player> &player, shared_ptr<Game> &game)
 void ThiefState::UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
 	player->GetClient()->writeline("Which character do you want to steal from:");
-	player->GetClient()->writeline("  [0] Wizard");
-	player->GetClient()->writeline("  [1] King");
-	player->GetClient()->writeline("  [2] Bishop");
-	player->GetClient()->writeline("  [3] Merchant");
-	player->GetClient()->writeline("  [4] Architect");
-	player->GetClient()->writeline("  [5] Warlord");
+	player->GetClient()->writeline("  0. Wizard");
+	player->GetClient()->writeline("  1. King");
+	player->GetClient()->writeline("  2. Bishop");
+	player->GetClient()->writeline("  3. Merchant");
+	player->GetClient()->writeline("  4. Architect");
+	player->GetClient()->writeline("  5. Warlord");
 
 	Game::Character character = Game::LAST_CHARACTER;
 	do {

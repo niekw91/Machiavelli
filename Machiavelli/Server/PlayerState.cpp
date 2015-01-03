@@ -23,7 +23,7 @@ void PlayerState::RenderBuildings(shared_ptr<Player> &player)
 		std::string name = buildings->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  - " + name + "(" + color + "," + value + ")");
+		player->GetClient()->writeline("  " + to_string(i) + ". " + name + "(" + color + "," + value + ")");
 	}
 }
 
@@ -35,7 +35,7 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 		std::string name = buildingCards->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildingCards->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildingCards->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline(std::to_string(i) + " - " + name + "(" + color + "," + value + ")");
+		player->GetClient()->writeline("  " + to_string(i) + ". " + name + "(" + color + "," + value + ")");
 	}
 }
 
@@ -92,7 +92,7 @@ void PlayerState::RenderChoices(shared_ptr<Player> &player)
 	player->GetClient()->writeline("\r\nMake your choice:");
 
 	for (size_t i = 0; i < _basicChoices.size(); i++) {
-		player->GetClient()->writeline("[" + std::to_string(i) + "]" + _basicChoices.at(i).GetText());
+		player->GetClient()->writeline("  " + to_string(i) + ". " + _basicChoices.at(i).GetText());
 	}
 }
 
@@ -148,7 +148,7 @@ void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &g
 		std::string name = buildings->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline(std::to_string(i) + " - " + name + "(" + color + "," + value + ")");
+		player->GetClient()->writeline("  " + to_string(i) + ". " + name + "(" + color + "," + value + ")");
 	}
 }
 
