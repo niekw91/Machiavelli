@@ -10,6 +10,7 @@
 #include "WizardState.h"
 #include "ArchitectState.h"
 #include "KingState.h"
+#include "GameOverState.h"
 
 PlayState::PlayState() 
 {
@@ -43,6 +44,13 @@ void PlayState::HandleEvents(shared_ptr<Game> &game)
 
 void PlayState::Update(shared_ptr<Game> &game)
 {
+	// Check if players have 8 or more buildings
+	auto players = game->GetPlayers();
+	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
+		if (players->at(i)->GetBuildings()->Size() >= 8) // Game Over
+			game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<GameOverState>()));
+	}
+
 	while (!game->GetOrderQueue()->empty())
 	{
 		Game::Character next = game->GetOrderQueue()->front();

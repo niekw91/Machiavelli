@@ -51,6 +51,9 @@ public:
 
 	void SetBuildingCards(shared_ptr<CardStack<BuildingCard>> buildingcards);
 
+	void AddPoints(int amount) { _score += amount; }
+	int GetScore() { return _score; }
+
 private:
 	shared_ptr<PlayerStateMachine> _stateMachine;
 	shared_ptr<Socket> _client;
@@ -58,6 +61,7 @@ private:
 
 	bool _hasCrown;
 
+	int _score;
 	int _gold;
 
 	shared_ptr<CardStack<CharacterCard>> _characterCards;
