@@ -3,6 +3,7 @@
 #include "CharacterCard.h"
 #include "PlayerStateMachine.h"
 #include "GameOverState.h"
+#include "PickCardState.h"
 #include "AssassinState.h"
 #include "ThiefState.h"
 #include "BishopState.h"
@@ -28,9 +29,6 @@ void PlayState::Init(shared_ptr<Game> &game)
 	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
 		players->at(i)->GetClient()->writeline("Starting game!");
 	}
-	
-	game->GenerateOrder();
-	game->GenerateMap();
 }
 
 void PlayState::Cleanup(shared_ptr<Game> &game)
@@ -46,11 +44,11 @@ void PlayState::HandleEvents(shared_ptr<Game> &game)
 void PlayState::Update(shared_ptr<Game> &game)
 {
 	// Check if players have 8 or more buildings
-	auto players = game->GetPlayers();
-	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
-		if (players->at(i)->GetBuildings()->Size() >= 8) // Game Over
-			game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<GameOverState>()));
-	}
+	//auto players = game->GetPlayers();
+	//for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
+	//	if (players->at(i)->GetBuildings()->Size() >= 8) // Game Over
+	//		game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<GameOverState>()));
+	//}
 
 	while (!game->GetOrderQueue()->empty())
 	{
@@ -154,7 +152,7 @@ void PlayState::Update(shared_ptr<Game> &game)
 	if (finished)
 		game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<GameOverState>()));
 	else
-		game->ResetRound();
+		game->GetStateManager()->ChangeState(game, dynamic_pointer_cast<GameState>(make_shared<PickCardState>()));
 }
 
 shared_ptr<Player> PlayState::HasCharacterCard(Game::Character character, shared_ptr<Game> &game)

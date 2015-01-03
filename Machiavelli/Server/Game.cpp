@@ -39,6 +39,7 @@ void Game::Init()
 
 	// Start running
 	_running = true;
+	SetGameStart(true);
 }
 
 void Game::Cleanup() 
@@ -196,4 +197,6 @@ void Game::ResetRound()
 		_players->at(i)->GetCharacterCards()->Clear();
 		_players->at(i)->GetBuildings()->Clear();
 	}
+
+	GenerateOrder();
 }

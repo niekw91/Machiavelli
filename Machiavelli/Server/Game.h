@@ -64,6 +64,8 @@ public:
 	shared_ptr<Player> GetOpponent(shared_ptr<Player> &player);
 
 	void ResetRound();
+	bool IsGameStart() { return _gameStart; }
+	void SetGameStart(bool start) { _gameStart = start; }
 private:
 	const int GOLD_AMOUNT{ 30 };
 
@@ -84,5 +86,6 @@ private:
 	int _gold;
 
 	bool _running;
+	bool _gameStart;
 };
 

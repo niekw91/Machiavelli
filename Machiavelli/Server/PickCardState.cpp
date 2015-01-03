@@ -17,23 +17,29 @@ PickCardState::~PickCardState()
 
 void PickCardState::Init(shared_ptr<Game> &game)
 {
-	std::cerr << "Game: 2 player connected, starting game.\r\n";
-	auto players = game->GetPlayers();
-
 	game->ResetRound();
 
-	// Pick random player to have the crown
-	int random = Random::Next(0, players->size() - 1);
-	players->at(random)->SetCrown(true);
-	players->at(random)->GetClient()->writeline("You have been given the crown!");
+	if (game->IsGameStart()) {
+		game->GenerateMap();
 
-	// Give each player 2 gold peices and 4 building cards
-	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
-		int amount = game->RemoveGold(2);
-		if (amount != -1)
-			players->at(i)->AddGold(2);
-		for (size_t b = 0; b < 4; b++)
-			players->at(i)->AddBuildingCard(game->GetBuildingCards()->GetRandomCard());
+		std::cerr << "Game: 2 player connected, starting game.\r\n";
+		auto players = game->GetPlayers();
+
+		// Pick random player to have the crown
+		int random = Random::Next(0, players->size() - 1);
+		players->at(random)->SetCrown(true);
+		players->at(random)->GetClient()->writeline("You have been given the crown!");
+
+		// Give each player 2 gold peices and 4 building cards
+		for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
+			int amount = game->RemoveGold(2);
+			if (amount != -1)
+				players->at(i)->AddGold(2);
+			for (size_t b = 0; b < 4; b++)
+				players->at(i)->AddBuildingCard(game->GetBuildingCards()->GetRandomCard());
+		}
+
+		game->SetGameStart(false);
 	}
 }
 
