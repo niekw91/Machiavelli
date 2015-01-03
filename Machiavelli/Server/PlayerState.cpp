@@ -51,6 +51,9 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 	if (character == "Architect")
 		_basicChoices.push_back(Option("card", " Take 2 building cards", false, (function<void()>)[&] {
 			TakeBuildingCards(player, game, 2);
+
+			// Show building cards
+			RenderCardsInHand(player);
 		}));
 	else
 		_basicChoices.push_back(Option("card", " Take 2 building cards and put 1 away", false, (function<void()>)[&] {
@@ -122,7 +125,7 @@ void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game,
 	if (!_basicChoices.at(choice).isPermanent()) {
 		if (_basicChoices.at(choice).GetKey() == "gold" || _basicChoices.at(choice).GetKey() == "card") {
 			RemoveChoice(1);
-			RemoveChoice(2);
+			RemoveChoice(1);
 		}
 		else
 			RemoveChoice(choice);
