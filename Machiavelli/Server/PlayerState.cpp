@@ -8,7 +8,10 @@ void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 	player->GetClient()->writeline("You are the: " + character);
 	player->GetClient()->writeline("Gold: " + std::to_string(player->GetGoldAmount()));
 
+	player->GetClient()->writeline("\r\nBuildings:");
 	RenderBuildings(player);
+
+	player->GetClient()->writeline("\r\nCards in hand:");
 	RenderCardsInHand(player);
 }
 
@@ -16,7 +19,6 @@ void PlayerState::RenderBuildings(shared_ptr<Player> &player)
 {
 	shared_ptr<CardStack<BuildingCard>> buildings = player->GetBuildings();
 
-	player->GetClient()->writeline("\r\nBuildings:");
 	for (size_t i = 0, blen = buildings->Size(); i < blen; ++i) {
 		std::string name = buildings->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
@@ -29,7 +31,6 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 {
 	shared_ptr<CardStack<BuildingCard>> buildingCards = player->GetBuildingCards();
 
-	player->GetClient()->writeline("\r\nCards in hand:");
 	for (size_t i = 0, blen = buildingCards->Size(); i < blen; ++i) {
 		std::string name = buildingCards->ShowCardByIndex(i).GetName();
 		std::string color = std::to_string(buildingCards->ShowCardByIndex(i).GetColor());
@@ -41,34 +42,39 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &game, string character)
 {
 
-	_basicChoices.push_back(Option(" Show opponent buildings and gold", true, (function<void()>)[&] {
+	_basicChoices.push_back(Option("show", " Show opponent buildings and gold", true, (function<void()>)[&] {
 		LookAtOpponent(player, game);
 	}));
-	_basicChoices.push_back(Option(" Take 2 gold pieces", false, (function<void()>)[&] {
+	_basicChoices.push_back(Option("gold", " Take 2 gold pieces", false, (function<void()>)[&] {
 		TakeGold(player, game, 2);
 	}));
 	if (character == "Architect")
-		_basicChoices.push_back(Option(" Take 2 building cards", false, (function<void()>)[&] {
+		_basicChoices.push_back(Option("card", " Take 2 building cards", false, (function<void()>)[&] {
 			TakeBuildingCards(player, game, 2);
 		}));
 	else
-		_basicChoices.push_back(Option(" Take 2 building cards and put 1 away", false, (function<void()>)[&] {
+		_basicChoices.push_back(Option("card", " Take 2 building cards and put 1 away", false, (function<void()>)[&] {
+			// Draw 2 building cards
 			TakeBuildingCards(player, game, 2);
+
+			// Show building cards
+			RenderCardsInHand(player);
+
+			// Choose building card to be removed
 			int choice = -1;
 			do {
-				RenderBuildings(player);
 				choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
 			} while (choice == -1);
 			player->RemoveBuildingCard(choice);
 		}));
-	_basicChoices.push_back(Option(" Use character ability", false, (function<void()>)[&] {
+	_basicChoices.push_back(Option("ability", " Use character ability", false, (function<void()>)[&] {
 		UseAbility(player, game);
 	}));
 	for (int i = 0, ilen = character == "Architect" ? 3 : 1; i < ilen; ++i)
-		_basicChoices.push_back(Option(" Build building", false, (function<void()>)[&] {
+		_basicChoices.push_back(Option("build", " Build building", false, (function<void()>)[&] {
 			Build(player, game);
 		}));
-	_basicChoices.push_back(Option(" End turn", true, (function<void()>)[&] {
+	_basicChoices.push_back(Option("done", " End turn", true, (function<void()>)[&] {
 		_endTurn = true;
 	}));
 }
@@ -114,11 +120,12 @@ void PlayerState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game,
 {
 	_basicChoices.at(choice).doAction();
 	if (!_basicChoices.at(choice).isPermanent()) {
-		RemoveChoice(choice);
-		for (size_t i = 0, ilen = _basicChoices.size(); i < ilen; ++i) {
-			if (!_basicChoices.at(i).isPermanent())
-				RemoveChoice(i);
+		if (_basicChoices.at(choice).GetKey() == "gold" || _basicChoices.at(choice).GetKey() == "card") {
+			RemoveChoice(1);
+			RemoveChoice(2);
 		}
+		else
+			RemoveChoice(choice);
 	}
 }
 
