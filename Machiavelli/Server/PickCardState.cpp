@@ -17,7 +17,7 @@ PickCardState::~PickCardState()
 
 void PickCardState::Init(shared_ptr<Game> &game)
 {
-	game->ResetRound();
+	game->ResetRound(game->IsGameStart());
 
 	if (game->IsGameStart()) {
 		game->GenerateMap();

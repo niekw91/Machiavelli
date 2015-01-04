@@ -178,24 +178,24 @@ void Game::GenerateMap()
 	_characterMap->insert(std::make_pair(WARLORD, "Warlord"));
 }
 
-void Game::ResetRound()
+void Game::ResetRound(bool isStart)
 {
+	if (isStart) {
+		shared_ptr<CardStack<BuildingCard>> bCards = _factory->GetBuildingCards();
+		_buildingCards->Clear();
+		for (size_t i = 0, blen = bCards->Size(); i < blen; ++i)
+			_buildingCards->AddCard(bCards->ShowCardByIndex(i));
+	}
+
 	shared_ptr<CardStack<CharacterCard>> cCards = _factory->GetCharacterCards();
-	shared_ptr<CardStack<BuildingCard>> bCards = _factory->GetBuildingCards();
 
 	_characterCards->Clear();
-	_buildingCards->Clear();
 
 	for (size_t i = 0, clen = cCards->Size(); i < clen; ++i)
 		_characterCards->AddCard(cCards->ShowCardByIndex(i));
 
-	for (size_t i = 0, blen = bCards->Size(); i < blen; ++i)
-		_buildingCards->AddCard(bCards->ShowCardByIndex(i));
-
 	for (size_t i = 0, plen = _players->size(); i < plen; ++i) {
-		_players->at(i)->GetBuildingCards()->Clear();
 		_players->at(i)->GetCharacterCards()->Clear();
-		_players->at(i)->GetBuildings()->Clear();
 	}
 
 	GenerateOrder();

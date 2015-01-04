@@ -63,7 +63,7 @@ public:
 
 	shared_ptr<Player> GetOpponent(shared_ptr<Player> &player);
 
-	void ResetRound();
+	void ResetRound(bool isStart);
 	bool IsGameStart() { return _gameStart; }
 	void SetGameStart(bool start) { _gameStart = start; }
 private:

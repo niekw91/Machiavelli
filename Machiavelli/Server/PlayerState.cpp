@@ -91,6 +91,16 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 			TakeGold(player, game, 1);			
 		}));
 	}
+	if (player->HasBuilding("Workshop")) {
+		_basicChoices.push_back(Option("workshop", " Pay 3 gold coins and receive 2 building cards [Workshop]", false, (function<void()>)[&] {
+			if (player->GetGoldAmount() >= 3) {
+				player->RemoveGold(3);
+				game->AddGold(3);
+
+				TakeBuildingCards(player, game, 2);
+			}
+		}));
+	}
 	_basicChoices.push_back(Option("done", " End turn", true, (function<void()>)[&] {
 		_endTurn = true;
 	}));
