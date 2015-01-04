@@ -74,20 +74,24 @@ void WarlordState::UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game
 		} while (choice == -1);
 
 		BuildingCard destroy = game->GetOpponent(player)->GetBuildings()->ShowCardByIndex(choice);
-		if (destroy.GetValue() == 1)
-			game->GetOpponent(player)->DestroyByIndex(choice);
-		else  {
-			int cost = destroy.GetValue() - 1;
-			if (player->GetGoldAmount() >= cost) {
-				// Player has enough gold to destroy building
-				player->RemoveGold(cost);
-				game->AddGold(cost);
+		if (destroy.GetName() == "Dungeon")
+			player->GetClient()->writeline("A dungeon cannot be destroyed!");
+		else {
+			if (destroy.GetValue() == 1)
 				game->GetOpponent(player)->DestroyByIndex(choice);
-				player->GetClient()->writeline("Building destroyed!");
-			}
-			else {
-				// Not enough gold to destroy this building
-				player->GetClient()->writeline("Not enough gold available to destroy this building!");
+			else  {
+				int cost = destroy.GetValue() - 1;
+				if (player->GetGoldAmount() >= cost) {
+					// Player has enough gold to destroy building
+					player->RemoveGold(cost);
+					game->AddGold(cost);
+					game->GetOpponent(player)->DestroyByIndex(choice);
+					player->GetClient()->writeline("Building destroyed!");
+				}
+				else {
+					// Not enough gold to destroy this building
+					player->GetClient()->writeline("Not enough gold available to destroy this building!");
+				}
 			}
 		}
 	}
