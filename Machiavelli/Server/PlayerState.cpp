@@ -77,6 +77,20 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 		_basicChoices.push_back(Option("build", " Build building", false, (function<void()>)[&] {
 			Build(player, game);
 		}));
+	if (player->HasBuilding("Laboratory")) {
+		_basicChoices.push_back(Option("laboratory", " Trade building card for 1 gold coin [Laboratory]", false, (function<void()>)[&] {
+			// Show building cards
+			RenderCardsInHand(player);
+
+			// Choose building card to be removed
+			int choice = -1;
+			do {
+				choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
+			} while (choice == -1);
+			player->RemoveBuildingCard(choice);
+			TakeGold(player, game, 1);			
+		}));
+	}
 	_basicChoices.push_back(Option("done", " End turn", true, (function<void()>)[&] {
 		_endTurn = true;
 	}));

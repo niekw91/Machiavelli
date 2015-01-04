@@ -90,3 +90,12 @@ bool Player::HasCharacterCard(std::string name)
 	}
 	return false;
 }
+
+bool Player::HasBuilding(std::string name)
+{
+	for (size_t i = 0, len = _buildings->Size(); i < len; ++i) {
+		if (_buildings->ShowCardByIndex(i).GetName() == name)
+			return true;
+	}
+	return false;
+}

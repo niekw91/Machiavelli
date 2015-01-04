@@ -29,6 +29,7 @@ public:
 	int NumberOfCharacterCards() { return _characterCards->Size(); }
 
 	bool HasCharacterCard(std::string name);
+	bool HasBuilding(std::string name);
 
 	BuildingCard GetBuildingCard(int index);
 	void AddBuildingCard(BuildingCard card);
