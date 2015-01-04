@@ -198,5 +198,8 @@ void Game::ResetRound(bool isStart)
 		_players->at(i)->GetCharacterCards()->Clear();
 	}
 
+	_flagForKill = LAST_CHARACTER;
+	_flagForSteal = LAST_CHARACTER;
+
 	GenerateOrder();
 }
