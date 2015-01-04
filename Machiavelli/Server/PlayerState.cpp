@@ -60,15 +60,23 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 			// Draw 2 building cards
 			TakeBuildingCards(player, game, 2);
 
-			// Show building cards
-			RenderCardsInHand(player);
+			if (player->HasBuilding("Library"))
+				player->GetClient()->writeline("\nYou have the library building and therefor may keep both cards");
+			else
+			{
+				// Show building cards
+				RenderCardsInHand(player);
 
-			// Choose building card to be removed
-			int choice = -1;
-			do {
-				choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
-			} while (choice == -1);
-			player->RemoveBuildingCard(choice);
+				player->GetClient()->writeline("\nWhat card do you want to put away?");
+
+				// Choose building card to be removed
+				int choice = -1;
+				do {
+					choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
+				} while (choice == -1);
+
+				player->RemoveBuildingCard(choice);
+			}
 		}));
 	_basicChoices.push_back(Option("ability", " Use character ability", false, (function<void()>)[&] {
 		UseAbility(player, game);
@@ -81,6 +89,8 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 		_basicChoices.push_back(Option("laboratory", " Trade building card for 1 gold coin [Laboratory]", false, (function<void()>)[&] {
 			// Show building cards
 			RenderCardsInHand(player);
+
+			player->GetClient()->writeline("\nWhat card do you want to put away?");
 
 			// Choose building card to be removed
 			int choice = -1;
