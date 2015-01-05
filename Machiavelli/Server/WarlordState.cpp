@@ -85,7 +85,8 @@ void WarlordState::UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game
 					// Player has enough gold to destroy building
 					player->RemoveGold(cost);
 					game->AddGold(cost);
-					game->GetOpponent(player)->DestroyByIndex(choice);
+					BuildingCard card = game->GetOpponent(player)->GetBuildings()->GetCardByIndex(choice);
+					game->AddBuildingCard(card);
 					player->GetClient()->writeline("Building destroyed!");
 				}
 				else {
