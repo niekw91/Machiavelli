@@ -34,9 +34,9 @@ void Player::AddBuildingCard(BuildingCard card)
 	_buildingCards->AddCard(card);
 }
 
-void Player::RemoveBuildingCard(int index)
+BuildingCard Player::RemoveBuildingCard(int index)
 {
-	_buildingCards->EraseCardByIndex(index);
+	return _buildingCards->GetCardByIndex(index);
 }
 
 BuildingCard Player::GetBuildingCard(int index)

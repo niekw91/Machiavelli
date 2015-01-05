@@ -21,9 +21,9 @@ void PlayerState::RenderBuildings(shared_ptr<Player> &player)
 
 	for (size_t i = 0, blen = buildings->Size(); i < blen; ++i) {
 		std::string name = buildings->ShowCardByIndex(i).GetName();
-		std::string color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
+		std::string color = GetColor(buildings->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  " + to_string(i) + ". " + name + "(" + color + "," + value + ")");
+		player->GetClient()->writeline("  " + to_string(i) + ". " + name + " (" + color + ", " + value + ")");
 	}
 }
 
@@ -33,9 +33,9 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 
 	for (size_t i = 0, blen = buildingCards->Size(); i < blen; ++i) {
 		std::string name = buildingCards->ShowCardByIndex(i).GetName();
-		std::string color = std::to_string(buildingCards->ShowCardByIndex(i).GetColor());
+		std::string color = GetColor(buildingCards->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildingCards->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  " + to_string(i) + ". " + name + "(" + color + "," + value + ")");
+		player->GetClient()->writeline("  " + to_string(i) + ". " + name + " (" + color + ", " + value + ")");
 	}
 }
 
@@ -75,7 +75,8 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 					choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
 				} while (choice == -1);
 
-				player->RemoveBuildingCard(choice);
+				BuildingCard card = player->RemoveBuildingCard(choice);
+				game->AddBuildingCard(card); // Add back to building card stack
 			}
 		}));
 	_basicChoices.push_back(Option("ability", " Use character ability", false, (function<void()>)[&] {
@@ -97,7 +98,9 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 			do {
 				choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
 			} while (choice == -1);
-			player->RemoveBuildingCard(choice);
+
+			BuildingCard card = player->RemoveBuildingCard(choice);
+			game->AddBuildingCard(card); // Add back to building card stack
 			TakeGold(player, game, 1);			
 		}));
 	}
@@ -180,29 +183,9 @@ void PlayerState::LookAtOpponent(shared_ptr<Player> &player, shared_ptr<Game> &g
 	player->GetClient()->writeline("\r\nBuildings:");
 	for (size_t i = 0, blen = buildings->Size(); i < blen; ++i) {
 		std::string name = buildings->ShowCardByIndex(i).GetName();
-		std::string color;
-		switch (buildings->ShowCardByIndex(i).GetColor()){
-		case Game::BLUE:
-			color = "Blue";
-			break;
-		case Game::RED:
-			color = "Red";
-			break;
-		case Game::PURPLE:
-			color = "Purple";
-			break;
-		case Game::YELLOW:
-			color = "Yellow";
-				break;
-		case Game::GREEN:
-			color = "Green";
-				break;
-		default:
-			color = std::to_string(buildings->ShowCardByIndex(i).GetColor());
-			break;
-		}
+		std::string color = GetColor(buildings->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  " + to_string(i) + ". " + name + "(" + color + ", " + value + " gold)");
+		player->GetClient()->writeline("  " + to_string(i) + ". " + name + " (" + color + ", " + value + " gold)");
 	}
 }
 
@@ -243,4 +226,32 @@ void PlayerState::Build(shared_ptr<Player> &player, shared_ptr<Game> &game)
 		player->AddBuildingCard(card);
 		player->GetClient()->writeline("Not enough gold available to build " + card.GetName());
 	}
+}
+
+std::string PlayerState::GetColor(int c)
+{
+	std::string color;
+
+	switch (c) 
+	{
+	case Game::BLUE:
+		color = "Blue";
+		break;
+	case Game::RED:
+		color = "Red";
+		break;
+	case Game::PURPLE:
+		color = "Purple";
+		break;
+	case Game::YELLOW:
+		color = "Yellow";
+		break;
+	case Game::GREEN:
+		color = "Green";
+		break;
+	default:
+		break;
+	}
+
+	return color;
 }

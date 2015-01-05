@@ -38,6 +38,7 @@ public:
 	void TakeGold(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
 	void TakeBuildingCards(shared_ptr<Player> &player, shared_ptr<Game> &game, int amount);
 	void Build(shared_ptr<Player> &player, shared_ptr<Game> &game);
+	std::string GetColor(int color);
 private:
 	vector<Option> _basicChoices;
 protected:

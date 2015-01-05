@@ -33,7 +33,7 @@ public:
 
 	BuildingCard GetBuildingCard(int index);
 	void AddBuildingCard(BuildingCard card);
-	void RemoveBuildingCard(int index);
+	BuildingCard RemoveBuildingCard(int index);
 	shared_ptr<CardStack<BuildingCard>> GetBuildingCards() { return _buildingCards; }
 
 	void Build(BuildingCard card);
