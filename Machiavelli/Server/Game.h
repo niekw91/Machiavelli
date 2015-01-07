@@ -53,13 +53,19 @@ public:
 	int RemoveGold(int amount);
 
 	void GenerateOrder();
-	void KillCharacter(Character character);
-	bool HasBeenKilled(Character character) { return _flagForKill == character; }
 	void GenerateMap();
 	shared_ptr<std::queue<Character>> GetOrderQueue() { return _orderQueue; }
 	shared_ptr<std::map<Game::Character, std::string>> GetCharacterMap() { return _characterMap; }
+	
+	void KillCharacter(Character character);
+	bool HasBeenKilled(Character character) { return _flagForKill == character; }
+
 	void StealFrom(Character character);
-	bool IsThiefTarget(Character character) { return _flagForSteal == character; }
+	bool IsThiefTarget(Character character) { return _flagForTheft == character; }
+
+	void Attack(Character character, BuildingCard building);
+	bool IsAttackTarget(Character character) { _flagForAttack == character; }
+	BuildingCard GetAttackTarget() { return _flagForTarget; }
 
 	shared_ptr<Player> GetOpponent(shared_ptr<Player> &player);
 
@@ -76,7 +82,10 @@ private:
 	shared_ptr<std::queue<Character>> _orderQueue;
 	shared_ptr<std::map<Game::Character, std::string>> _characterMap;
 	Character _flagForKill;
-	Character _flagForSteal;
+	Character _flagForTheft;
+
+	Character _flagForAttack;
+	BuildingCard _flagForTarget;
 
 	shared_ptr<CardStack<CharacterCard>> _characterCards;
 	shared_ptr<CardStack<BuildingCard>> _buildingCards;

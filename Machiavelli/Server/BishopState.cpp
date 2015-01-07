@@ -12,20 +12,24 @@ BishopState::~BishopState()
 
 void BishopState::Init(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
-	int blueBuildings = 0;
-	for (size_t i = 0, blen = player->GetBuildings()->Size(); i < blen; ++i) {
-		if (player->GetBuildings()->ShowCardByIndex(i).GetColor() == 3)
-			blueBuildings++;
+	// Receive gold for player color buildings
+	int playercolor = Game::Color::BLUE;
+	int playercolorbuildings = 0;
+	auto buildings = player->GetBuildings();
+
+	for (auto i = 0, ilen = buildings->Size(); i < ilen; ++i) {
+		if (buildings->GetCardByIndex(i).GetColor() == playercolor)
+			++playercolorbuildings;
 	}
-	if (blueBuildings > 0) {
-		int gold = game->RemoveGold(blueBuildings);
-		if (gold != -1) {
-			player->AddGold(gold);
-			player->GetClient()->writeline("You receive 1 gold coin for each blue building, " + std::to_string(gold) + " gold received!");
-		}
-	}
+	if (playercolorbuildings > 0)
+		player->AddGold(playercolorbuildings);
 	else {
-		player->GetClient()->writeline("You do not own any blue buildings and therefor receive no gold");
+		player->GetClient()->writeline("You do not own any " + GetColor(playercolor) + " buildings and therefore receive no gold");
+	}
+	if (player->HasBuilding("School of Wizards")) {
+		int gold = 1;
+		player->AddGold(gold);
+		player->GetClient()->writeline("You receive 1 gold coin for the School of Wizards, " + to_string(gold) + " gold received!");
 	}
 }
 

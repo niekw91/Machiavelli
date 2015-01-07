@@ -146,7 +146,13 @@ void Game::KillCharacter(Character character)
 
 void Game::StealFrom(Character character)
 {
-	_flagForSteal = character;
+	_flagForTheft = character;
+}
+
+void Game::Attack(Character character, BuildingCard building)
+{
+	_flagForAttack = character;
+	_flagForTarget = building;
 }
 
 shared_ptr<Player> Game::GetOpponent(shared_ptr<Player> &player)
@@ -205,7 +211,7 @@ void Game::ResetRound(bool isStart)
 	}
 
 	_flagForKill = LAST_CHARACTER;
-	_flagForSteal = LAST_CHARACTER;
+	_flagForTheft = LAST_CHARACTER;
 
 	GenerateOrder();
 }

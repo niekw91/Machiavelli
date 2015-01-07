@@ -24,7 +24,7 @@ void PlayerState::RenderBuildings(shared_ptr<Player> &player)
 		std::string name = buildings->ShowCardByIndex(i).GetName();
 		std::string color = GetColor(buildings->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildings->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  " + to_string(i) + ". " + name + " (" + color + ", " + value + ")");
+		player->GetClient()->writeline("  " + to_string(i) + ". " + name + " (" + color + ", " + value + " Gold)");
 	}
 }
 
@@ -62,30 +62,41 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 			// Show building cards
 			RenderCardsInHand(player);
 		}));
-	else
-		_basicChoices.push_back(Option("card", " Take 2 building cards and put 1 away", false, (function<void()>)[&] {
+	else {
+		int numberToDraw = 2;
+		int numberToDiscard = 1;
+
+		if (player->HasBuilding("Observatory")) {
+			++numberToDraw;
+			++numberToDiscard;
+		}
+		_basicChoices.push_back(Option("card", " Take " + to_string(numberToDraw) + " building cards and put " + to_string(numberToDiscard) + " away", false, (function<void()>)[&] {
 			// Draw 2 building cards
-			TakeBuildingCards(player, game, 2);
+			TakeBuildingCards(player, game, numberToDraw);
 
 			if (player->HasBuilding("Library"))
-				player->GetClient()->writeline("\nYou have the library building and therefor may keep both cards");
+				player->GetClient()->writeline("\nYou have the library building and therefore you may keep both cards");
 			else
 			{
-				// Show building cards
-				RenderCardsInHand(player);
-
-				player->GetClient()->writeline("\nWhat card do you want to put away?");
-
-				// Choose building card to be removed
-				int choice = -1;
 				do {
-					choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
-				} while (choice == -1);
+					// Show building cards
+					RenderCardsInHand(player);
 
-				BuildingCard card = player->RemoveBuildingCard(choice);
-				game->AddBuildingCard(card); // Add back to building card stack
+					player->GetClient()->writeline("\nWhat card do you want to put away?");
+
+					// Choose building card to be removed
+					int choice = -1;
+					do {
+						choice = HandleChoice(player, game, player->GetBuildingCards()->Size());
+					} while (choice == -1);
+
+					BuildingCard card = player->RemoveBuildingCard(choice);
+					game->AddBuildingCard(card); // Add back to building card stack
+					--numberToDiscard;
+				} while (numberToDiscard > 0);
 			}
 		}));
+	}
 	_basicChoices.push_back(Option("ability", " Use character ability", false, (function<void()>)[&] {
 		UseAbility(player, game);
 	}));

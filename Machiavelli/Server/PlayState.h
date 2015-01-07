@@ -19,5 +19,6 @@ public:
 private:
 	shared_ptr<Player> HasCharacterCard(Game::Character character, shared_ptr<Game> &game);
 	void StealGold(Game::Character character, shared_ptr<Game> &game);
+	void Attack(shared_ptr<Player> &player, shared_ptr<Game> &game);
 };
 

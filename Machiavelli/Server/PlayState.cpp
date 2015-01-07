@@ -177,3 +177,8 @@ void PlayState::StealGold(Game::Character character, shared_ptr<Game> &game)
 	thief->AddGold(stolenGold);
 	thief->GetClient()->writeline("You have stolen " + to_string(stolenGold) + " gold from the " + victimName + "!");
 }
+
+void PlayState::Attack(shared_ptr<Player> &player, shared_ptr<Game> &game)
+{
+
+}

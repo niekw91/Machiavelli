@@ -31,7 +31,9 @@ void GameOverState::Init(shared_ptr<Game> &game)
 		}
 
 		// Give player points for built buildings
-		players->at(i)->AddPoints(players->at(i)->GetBuildings()->Size());
+		for (auto l = 0, llen = buildings->Size(); l < llen; ++i) {
+			players->at(i)->AddPoints(players->at(i)->GetBuildings()->ShowCardByIndex(l).GetValue());
+		}
 
 		// Give player 3 points if 5 different colored buildings are built
 		bool hasCourtOfMiracles = false;
