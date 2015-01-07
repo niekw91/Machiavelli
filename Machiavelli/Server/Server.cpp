@@ -32,14 +32,16 @@ void Server::Start(shared_ptr<Game> &game) {
 			shared_ptr<Socket> client = nullptr;
 
 			while ((client = server.accept()) != nullptr) {
-				// communicate with client over new socket in separate thread
-				thread handler{ Server::HandleClient, client, game };
+				if (game->GetPlayerCount() < 2) {
+					// communicate with client over new socket in separate thread
+					thread handler{ Server::HandleClient, client, game };
 
-				// Add new client to game
-				game->AddPlayer(client);
+					// Add new client to game
+					game->AddPlayer(client);
 
-				handler.detach(); // detaching is usually ugly, but in this case the right thing to do
-				cerr << "Server: listening again" << '\n';
+					handler.detach(); // detaching is usually ugly, but in this case the right thing to do
+					cerr << "Server: listening again" << '\n';
+				}
 			}
 		}
 		catch (const exception& ex) {
