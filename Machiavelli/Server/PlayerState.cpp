@@ -36,7 +36,13 @@ void PlayerState::RenderCardsInHand(shared_ptr<Player> &player)
 		std::string name = buildingCards->ShowCardByIndex(i).GetName();
 		std::string color = GetColor(buildingCards->ShowCardByIndex(i).GetColor());
 		std::string value = std::to_string(buildingCards->ShowCardByIndex(i).GetValue());
-		player->GetClient()->writeline("  " + to_string(i) + ". " + name + " (" + color + ", " + value + ")");
+		std::vector<std::string> description = buildingCards->ShowCardByIndex(i).GetDescription();
+		if (description.empty())
+			player->GetClient()->writeline("  " + to_string(i) + ". " + name + " (" + color + ", " + value + ")");
+		else {
+			player->GetClient()->writeline("  " + to_string(i) + ". " + name + " (" + color + ", " + value + ", " + description.at(0) + ")");
+		}
+
 	}
 }
 

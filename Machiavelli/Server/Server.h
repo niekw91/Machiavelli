@@ -11,6 +11,6 @@ public:
 	static void HandleClient(shared_ptr<Socket> &socket, shared_ptr<Game> &game);
 	static void Consume(shared_ptr<Game> &game);
 private:
-	
+
 };
 

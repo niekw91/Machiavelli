@@ -13,8 +13,11 @@
 using namespace std;
 
 static Sync_queue<ClientCommand> syncQueue;
+static bool _running;
 
 void Server::Start(shared_ptr<Game> &game) {
+	_running = true;
+
 	// start command consumer thread
 	thread consumer{ Server::Consume, game };
 	consumer.detach(); // detaching is usually ugly, but in this case the right thing to do
@@ -48,7 +51,7 @@ void Server::Start(shared_ptr<Game> &game) {
 void Server::HandleClient(shared_ptr<Socket> &socket, shared_ptr<Game> &game) {
 	shared_ptr<Socket> client{ socket };
 
-	while (true) {
+	while (_running) {
 		try {
 			// read first line of request
 			string cmd = client->readline();
@@ -67,15 +70,17 @@ void Server::HandleClient(shared_ptr<Socket> &socket, shared_ptr<Game> &game) {
 			client->write("ERROR: ");
 			client->write(ex.what());
 			client->write("\n");
+			_running = false;
 		}
 		catch (...) {
 			client->write("ERROR: something went wrong during handling of your request. Sorry!\n");
+			_running = false;
 		}
 	}
 }
 
 void Server::Consume(shared_ptr<Game> &game) {
-	while (true) {
+	while (_running) {
 		ClientCommand command;
 		syncQueue.get(command); // will block here unless there still are command objects in the queue
 		shared_ptr<Socket> client{ command.get_client() };
@@ -95,6 +100,7 @@ void Server::Consume(shared_ptr<Game> &game) {
 		}
 		else {
 			cerr << "trying to handle command for client who has disappeared...\n";
+			_running = false;
 		}
 	}
 }
