@@ -79,11 +79,17 @@ void Game::AddCommand(ClientCommand command)
 bool Game::HasNextCommand(shared_ptr<Player> &player) {
 	bool has = false;
 
-	if (_commands->size() > 0)  {
-		ClientCommand command = _commands->front();
-		if (command.get_client() == player->GetClient())
+	while (_commands->size() > 1) {
+		if (_commands->front().get_client() != player->GetClient())
+			_commands->pop();
+	}
+	if (!_commands->empty()) {
+		if (_commands->front().get_client() != player->GetClient())
+			_commands->pop();
+		else
 			has = true;
 	}
+
 	return has;
 }
 
