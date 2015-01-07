@@ -154,12 +154,6 @@ void Game::StealFrom(Character character)
 	_flagForTheft = character;
 }
 
-//void Game::Attack(Character character, BuildingCard building)
-//{
-//	_flagForAttack = character;
-//	_flagForTarget = building;
-//}
-
 shared_ptr<Player> Game::GetOpponent(shared_ptr<Player> &player)
 {
 	// Determine opponent

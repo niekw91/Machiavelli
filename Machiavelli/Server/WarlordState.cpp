@@ -90,8 +90,19 @@ void WarlordState::UseAbility(shared_ptr<Player> &player, shared_ptr<Game> &game
 					player->RemoveGold(cost);
 					game->AddGold(cost);
 					BuildingCard card = game->GetOpponent(player)->GetBuildings()->GetCardByIndex(choice);
-					game->AddBuildingCard(card);
+					
 					player->GetClient()->writeline("Building destroyed!");
+					
+					if (game->GetOpponent(player)->GetGoldAmount() >= 1 && game->GetOpponent(player)->HasBuilding("Graveyard")) {
+						game->GetOpponent(player)->RemoveGold(1);
+						game->AddGold(1);
+						game->GetOpponent(player)->AddBuildingCard(card);
+						game->GetOpponent(player)->GetClient()->writeline("The warlord destoyed your " + card.GetName() + ", card returned to your hand");
+					}
+					else {
+						game->GetOpponent(player)->GetClient()->writeline("The warlord destoyed your " + card.GetName() + "!");
+						game->AddBuildingCard(card);
+					}
 				}
 				else {
 					// Not enough gold to destroy this building

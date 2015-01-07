@@ -64,10 +64,6 @@ public:
 	void StealFrom(Character character);
 	bool IsThiefTarget(Character character) { return _flagForTheft == character; }
 
-	//void Attack(Character character, BuildingCard building);
-	//bool IsAttackTarget(Character character) { _flagForAttack == character; }
-	//BuildingCard GetAttackTarget() { return _flagForTarget; }
-
 	shared_ptr<Player> GetOpponent(shared_ptr<Player> &player);
 
 	void ResetRound(bool isStart);
@@ -85,9 +81,6 @@ private:
 	shared_ptr<std::map<Game::Character, std::string>> _characterMap;
 	Character _flagForKill;
 	Character _flagForTheft;
-
-	//Character _flagForAttack;
-	//BuildingCard _flagForTarget;
 
 	shared_ptr<CardStack<CharacterCard>> _characterCards;
 	shared_ptr<CardStack<BuildingCard>> _buildingCards;
