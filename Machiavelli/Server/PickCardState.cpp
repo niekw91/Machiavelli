@@ -29,6 +29,7 @@ void PickCardState::Init(shared_ptr<Game> &game)
 		int random = Random::Next(0, players->size() - 1);
 		players->at(random)->SetCrown(true);
 		players->at(random)->GetClient()->writeline("You have been given the crown!\r\n");
+		game->GetOpponent(players->at(random))->GetClient()->writeline("Your opponent has been given the crown");
 
 		// Give each player 2 gold peices and 4 building cards
 		for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
@@ -71,8 +72,10 @@ void PickCardState::Update(shared_ptr<Game> &game)
 
 void PickCardState::HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game)
 {
+	player->GetClient()->clear();
 	player->GetClient()->writeline("Pick a card to remove from deck:");
 	PickCard(player, game);
+	player->GetClient()->clear();
 	player->GetClient()->writeline("Pick the card you want to play with:");
 	CharacterCard card = PickCard(player, game);
 	player->AddCharacterCard(card);
@@ -83,18 +86,29 @@ CharacterCard PickCardState::PickCard(shared_ptr<Player> &player, shared_ptr<Gam
 	shared_ptr<CardStack<CharacterCard>> characterCards = game->GetCharacterCards();
 	for (size_t i = 0, ilen = characterCards->Size(); i < ilen; ++i)
 		player->GetClient()->writeline("  " + to_string(i) + ". " + characterCards->ShowCardByIndex(i).GetName());
-	// Wait fot command callback
+	
+	int choice = -1;
+	do {
+		choice = HandleChoice(player, game, characterCards->Size() - 1);
+	} while (choice == -1);
+
+	return characterCards->GetCardByIndex(choice);
+}
+
+int PickCardState::HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game, int range)
+{
+	// Wait for command callback
 	while (!game->HasNextCommand(player)) {}
 	// Get next command for current player
 	ClientCommand command = game->GetNextCommand(player);
 	char choice[] = "X";
 	choice[0] = command.get_cmd().back();
 	int index = std::atoi(choice) > 0 ? std::atoi(choice) : 0;
-	if (index < 0 || index >= characterCards->Size()) {
+	if (index < 0 || index > range) {
 		// Invalid index entered
-		//return NULL;
+		return -1;
 	}
 	else {
-		return characterCards->GetCardByIndex(index);
+		return index;
 	}
 }

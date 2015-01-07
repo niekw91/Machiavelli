@@ -18,4 +18,5 @@ public:
 
 	CharacterCard PickCard(shared_ptr<Player> &player, shared_ptr<Game> &game);
 	void HandleTurn(shared_ptr<Player> &player, shared_ptr<Game> &game);
+	int HandleChoice(shared_ptr<Player> &player, shared_ptr<Game> &game, int range);
 };

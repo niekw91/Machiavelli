@@ -120,6 +120,11 @@ void Socket::writeline(const std::string &msg)
 	write(msg + "\r\n");
 }
 
+void Socket::clear()
+{
+	write("\f");
+}
+
 void Socket::write(const std::string& msg)
 {
 	write(msg.c_str(), msg.length());

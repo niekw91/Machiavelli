@@ -5,6 +5,7 @@
 
 void PlayerState::Render(shared_ptr<Player> &player, std::string character)
 {
+	player->GetClient()->clear();
 	player->GetClient()->writeline("You are the: " + character);
 	player->GetClient()->writeline("Gold: " + std::to_string(player->GetGoldAmount()));
 

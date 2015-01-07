@@ -50,6 +50,7 @@ public:
 	std::string readline();
 
 	void writeline(const std::string &msg);
+	void clear();
 	void write(const std::string& msg);
 	void write(const char *buf, size_t len);
 };
