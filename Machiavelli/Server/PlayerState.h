@@ -41,6 +41,9 @@ public:
 	std::string GetColor(int color);
 private:
 	vector<Option> _basicChoices;
+
+	int _numberToDraw = 2;
+	int _numberToDiscard = 1;
 protected:
 	bool _endTurn;
 };

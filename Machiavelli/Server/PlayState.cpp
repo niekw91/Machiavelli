@@ -29,6 +29,17 @@ void PlayState::Init(shared_ptr<Game> &game)
 	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
 		players->at(i)->GetClient()->writeline("Starting game!");
 	}
+
+	EnableCheatMode(game);
+}
+
+void PlayState::EnableCheatMode(shared_ptr<Game> &game)
+{
+	auto players = game->GetPlayers();
+	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
+		for (int j = 0; j < 6; j++) 
+			players->at(i)->Build(game->GetBuildingCards()->GetRandomCard());
+	}
 }
 
 void PlayState::Cleanup(shared_ptr<Game> &game)

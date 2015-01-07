@@ -22,7 +22,7 @@ void KingState::Init(shared_ptr<Player> &player, shared_ptr<Game> &game)
 	auto buildings = player->GetBuildings();
 
 	for (auto i = 0, ilen = buildings->Size(); i < ilen; ++i) {
-		if (buildings->GetCardByIndex(i).GetColor() == playercolor)
+		if (buildings->ShowCardByIndex(i).GetColor() == playercolor)
 			++playercolorbuildings;
 	}
 	if (playercolorbuildings > 0)

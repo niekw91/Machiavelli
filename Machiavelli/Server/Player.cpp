@@ -13,6 +13,8 @@ Player::Player(shared_ptr<Socket> &client, shared_ptr<Game> &game) {
 	_buildingCards = make_shared<CardStack<BuildingCard>>();
 	_characterCards = make_shared<CardStack<CharacterCard>>();
 	_buildings = make_shared<CardStack<BuildingCard>>();
+
+	AddGold(100);
 }
 
 Player::~Player()

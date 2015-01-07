@@ -37,6 +37,7 @@ public:
 
 	void AddCommand(ClientCommand command);
 	bool HasNextCommand(shared_ptr<Player> &player);
+	bool HasAnyCommand();
 	ClientCommand GetNextCommand(shared_ptr<Player> &player);
 
 	shared_ptr<GameStateManager> &GetStateManager() { return _stateManager; }
@@ -63,15 +64,16 @@ public:
 	void StealFrom(Character character);
 	bool IsThiefTarget(Character character) { return _flagForTheft == character; }
 
-	void Attack(Character character, BuildingCard building);
-	bool IsAttackTarget(Character character) { _flagForAttack == character; }
-	BuildingCard GetAttackTarget() { return _flagForTarget; }
+	//void Attack(Character character, BuildingCard building);
+	//bool IsAttackTarget(Character character) { _flagForAttack == character; }
+	//BuildingCard GetAttackTarget() { return _flagForTarget; }
 
 	shared_ptr<Player> GetOpponent(shared_ptr<Player> &player);
 
 	void ResetRound(bool isStart);
 	bool IsGameStart() { return _gameStart; }
 	void SetGameStart(bool start) { _gameStart = start; }
+	void EndGame() { _running = false; }
 private:
 	const int GOLD_AMOUNT{ 30 };
 
@@ -84,8 +86,8 @@ private:
 	Character _flagForKill;
 	Character _flagForTheft;
 
-	Character _flagForAttack;
-	BuildingCard _flagForTarget;
+	//Character _flagForAttack;
+	//BuildingCard _flagForTarget;
 
 	shared_ptr<CardStack<CharacterCard>> _characterCards;
 	shared_ptr<CardStack<BuildingCard>> _buildingCards;

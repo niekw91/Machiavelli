@@ -63,16 +63,13 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 			RenderCardsInHand(player);
 		}));
 	else {
-		int numberToDraw = 2;
-		int numberToDiscard = 1;
-
 		if (player->HasBuilding("Observatory")) {
-			++numberToDraw;
-			++numberToDiscard;
+			_numberToDraw++;
+			_numberToDiscard++;
 		}
-		_basicChoices.push_back(Option("card", " Take " + to_string(numberToDraw) + " building cards and put " + to_string(numberToDiscard) + " away", false, (function<void()>)[&] {
+		_basicChoices.push_back(Option("card", " Take " + to_string(_numberToDraw) + " building cards and put " + to_string(_numberToDiscard) + " away", false, (function<void()>)[&] {
 			// Draw 2 building cards
-			TakeBuildingCards(player, game, numberToDraw);
+			TakeBuildingCards(player, game, _numberToDraw);
 
 			if (player->HasBuilding("Library"))
 				player->GetClient()->writeline("\nYou have the library building and therefore you may keep both cards");
@@ -92,18 +89,19 @@ void PlayerState::ResetChoices(shared_ptr<Player> &player, shared_ptr<Game> &gam
 
 					BuildingCard card = player->RemoveBuildingCard(choice);
 					game->AddBuildingCard(card); // Add back to building card stack
-					--numberToDiscard;
-				} while (numberToDiscard > 0);
+					--_numberToDiscard;
+				} while (_numberToDiscard > 0);
 			}
 		}));
 	}
 	_basicChoices.push_back(Option("ability", " Use character ability", false, (function<void()>)[&] {
 		UseAbility(player, game);
 	}));
-	for (int i = 0, ilen = character == "Architect" ? 3 : 1; i < ilen; ++i)
+	for (int i = 0, ilen = character == "Architect" ? 3 : 1; i < ilen; ++i) {
 		_basicChoices.push_back(Option("build", " Build building", false, (function<void()>)[&] {
 			Build(player, game);
 		}));
+	}
 	if (player->HasBuilding("Laboratory")) {
 		_basicChoices.push_back(Option("laboratory", " Trade building card for 1 gold coin [Laboratory]", false, (function<void()>)[&] {
 			// Show building cards

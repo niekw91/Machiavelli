@@ -19,43 +19,40 @@ void GameOverState::Init(shared_ptr<Game> &game)
 	for (size_t i = 0, ilen = players->size(); i < ilen; ++i) {
 		// Check if player has Dragongate or University buildings
 		auto buildings = players->at(i)->GetBuildings();
-		for (size_t k = 0, klen = buildings->Size(); k < klen; ++k) {
-			if (buildings->ShowCardByIndex(k).GetName() == "Dragongate") {
-				buildings->EraseCardByIndex(k);
-				players->at(i)->AddPoints(8);
+		if (buildings->Size() > 0) {
+			// Give player points for built buildings
+			for (auto l = 0, llen = buildings->Size(); l < llen; ++l) {
+				int value = 0;
+				if (buildings->ShowCardByIndex(l).GetName() == "Dragongate" || 
+					buildings->ShowCardByIndex(l).GetName() == "University")
+					value = 8;
+				else
+					value = players->at(i)->GetBuildings()->ShowCardByIndex(l).GetValue();
+				players->at(i)->AddPoints(value);
 			}
-			if (buildings->ShowCardByIndex(k).GetName() == "University") {
-				buildings->EraseCardByIndex(k);
-				players->at(i)->AddPoints(8);
-			}
-		}
 
-		// Give player points for built buildings
-		for (auto l = 0, llen = buildings->Size(); l < llen; ++i) {
-			players->at(i)->AddPoints(players->at(i)->GetBuildings()->ShowCardByIndex(l).GetValue());
-		}
-
-		// Give player 3 points if 5 different colored buildings are built
-		bool hasCourtOfMiracles = false;
-		int numberOfColors = 0;
-		set<int> colors;
-		for (size_t j = 0, jlen = buildings->Size(); j < jlen; ++j) {
-			if (buildings->ShowCardByIndex(j).GetName() == "Court of Miracles")
-				hasCourtOfMiracles = true;
-			for (size_t k = 0, klen = colors.size(); k < klen; ++k) {
-				if (colors.find(buildings->GetCardByIndex(j).GetColor()) == colors.end()) {
-					colors.insert(buildings->GetCardByIndex(j).GetColor());
-					++numberOfColors;
+			// Give player 3 points if 5 different colored buildings are built
+			bool hasCourtOfMiracles = false;
+			int numberOfColors = 0;
+			set<int> colors;
+			for (size_t j = 0, jlen = buildings->Size(); j < jlen; ++j) {
+				if (buildings->ShowCardByIndex(j).GetName() == "Court of Miracles")
+					hasCourtOfMiracles = true;
+				for (size_t k = 0, klen = colors.size(); k < klen; ++k) {
+					if (colors.find(buildings->GetCardByIndex(j).GetColor()) == colors.end()) {
+						colors.insert(buildings->GetCardByIndex(j).GetColor());
+						++numberOfColors;
+					}
 				}
 			}
+
+			if (numberOfColors >= 5 || numberOfColors >= 4 && hasCourtOfMiracles)
+				players->at(i)->AddPoints(3);
+
+			// Give player that has 8 buildings 4 points
+			if (players->at(i)->GetBuildings()->Size() >= 8)
+				players->at(i)->AddPoints(4);
 		}
-
-		if (numberOfColors >= 5 || numberOfColors >= 4 && hasCourtOfMiracles)
-			players->at(i)->AddPoints(3);
-
-		// Give player that has 8 buildings 4 points
-		if (players->at(i)->GetBuildings()->Size() >= 8)
-			players->at(i)->AddPoints(4);
 	}
 }
 
@@ -78,11 +75,13 @@ void GameOverState::Update(shared_ptr<Game> &game)
 	int player2points = player2->GetScore();
 
 	// Show scores
+	player1->GetClient()->clear();
 	player1->GetClient()->writeline("You scored " + to_string(player1points) + " points.");
-	player1->GetClient()->writeline("Your opponent has " + to_string(player1points) + " points.");
+	player1->GetClient()->writeline("Your opponent has " + to_string(player2points) + " points.");
 
+	player2->GetClient()->clear();
 	player2->GetClient()->writeline("You scored " + to_string(player2points) + " points.");
-	player2->GetClient()->writeline("Your opponent has " + to_string(player2points) + " points.");
+	player2->GetClient()->writeline("Your opponent has " + to_string(player1points) + " points.");
 
 	// Determine winner
 	int winner = -1;
@@ -110,9 +109,18 @@ void GameOverState::Update(shared_ptr<Game> &game)
 		break;
 	case 0:
 		player1->GetClient()->writeline("\r\nCongratulations you've won!");
+		player2->GetClient()->writeline("\r\nYou lost!");
+		player1->GetClient()->writeline("\r\nPress any key to exit..");
+		player2->GetClient()->writeline("\r\nPress any key to exit..");
 		break;
 	case 1:
 		player2->GetClient()->writeline("\r\nCongratulations you've won!");
+		player1->GetClient()->writeline("\r\nYou lost!");
+		player2->GetClient()->writeline("\r\nPress any key to exit..");
+		player1->GetClient()->writeline("\r\nPress any key to exit..");
 		break;
 	}
+
+	while (!game->HasAnyCommand()) {}
+	game->EndGame();
 }
