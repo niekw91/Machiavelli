@@ -29,7 +29,7 @@ void __throw_if_min1(int x, const char* file, unsigned int line, const char* mes
         ostringstream ec_str;
         ec_str << "system error " <<  ec.value() << ": " << ec.message();
         string msg {combine_message_elements(file, line, message, ec_str.str().c_str())};
-        throw system_error(ec, msg);
+        //throw system_error(ec, msg);
     }
 }
 

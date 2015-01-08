@@ -25,14 +25,14 @@ void Server::Start(shared_ptr<Game> &game) {
 	// create a server socket
 	ServerSocket server(ServerConfig::tcp_port);
 
-	while (true) {
+	while (_running) {
 		try {
 			// wait for connection from client; will create new socket
 			cerr << "Server: listening" << '\n';
 			shared_ptr<Socket> client = nullptr;
 
 			while ((client = server.accept()) != nullptr) {
-				if (game->GetPlayerCount() < 2) {
+				if (game->GetPlayerCount() < 2) { // Only create new handler if less than 2 players are connected
 					// communicate with client over new socket in separate thread
 					thread handler{ Server::HandleClient, client, game };
 
