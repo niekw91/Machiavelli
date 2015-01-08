@@ -30,7 +30,7 @@ void PlayState::Init(shared_ptr<Game> &game)
 		players->at(i)->GetClient()->writeline("Starting game!");
 	}
 
-	EnableCheatMode(game);
+	//EnableCheatMode(game);
 }
 
 void PlayState::EnableCheatMode(shared_ptr<Game> &game)
