@@ -1,3 +1,10 @@
+///
+//// Authors
+//// --------------------------
+//// Niek Willems	-	2064160
+//// Esté Tigele	-	2063665
+//
+
 using namespace std;
 #include "Game.h"
 
